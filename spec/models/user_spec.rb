@@ -22,4 +22,40 @@ describe User do
 		before { @user.username = "x" * 21 }
 		it { should_not be_valid}
 	end
+
+	describe "when username is already taken" do
+		before do
+			user_with_same_name = @user.dup
+			user_with_same_name.username = @user.username.upcase
+			user_with_same_name.email = "different@email.com"
+			user_with_same_name.save
+		end
+
+		it { should_not be_valid }
+	end
+
+	describe "when email is not present" do
+		before { @user.email = "" }
+		it { should_not be_valid }
+	end
+
+	describe "when email format is invalid" do
+		it "user should be invalid" do
+			addresses = %w[useratgmaildotcom me@mecom @gmail.com user]
+			addresses.each do |invalid_address|
+				@user.email = invalid_address
+				@user.should_not be_valid
+			end
+		end
+	end
+
+	describe "when email address is already taken" do
+before do
+			user_with_same_email = @user.dup
+			user_with_same_email.email = @user.email.upcase
+			user_with_same_email.username = "different_user"
+			user_with_same_email.save
+		end
+
+		it { should_not be_valid }	end
 end
