@@ -50,12 +50,38 @@ describe User do
 	end
 
 	describe "when email address is already taken" do
-before do
+		before do
 			user_with_same_email = @user.dup
 			user_with_same_email.email = @user.email.upcase
 			user_with_same_email.username = "different_user"
 			user_with_same_email.save
 		end
 
-		it { should_not be_valid }	end
+		it { should_not be_valid }
+	end
+
+	describe "when password is not present" do
+		before { @user.password = "" }
+		it { should_not be_valid }
+	end
+
+	describe "when password and password_confirmation don't match" do
+		before do
+			passwords = ["", "notpassword"]
+			passwords.each do |unmatched_password|
+				@user.password_confirmation = unmatched_password
+				@user.should_not be_valid
+			end
+		end
+	end
+
+	describe "with a password that is too short" do
+		before { @user.password = @user.password_confirmation = "Xxxx123" }
+		it { should_not be_valid }
+	end
+
+	describe "with a password that does not contain a number" do
+		before { @user.password = @user.password_confirmation = "Password" }
+		it { should_not be_valid}
+	end
 end
