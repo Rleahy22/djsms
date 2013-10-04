@@ -1,13 +1,14 @@
-<h1>DJ SMS</h1>
+<div class="container">
+	<h1>DJ SMS</h1>
 
-<%= form_for @user do |f| %>
-	
-	<%= f.label :username, "Username" %>
-	<%= f.text_field :username %>
+	<%= form_for @user do |f| %>
+		
+		<%= f.label :username, "USERNAME" %>
+		<%= f.text_field :username %>
 
-	<%= f.label :password, "Password" %>
-	<%= f.password_field :password %>
-	
-	<%= f.submit "Sign In" %>
-<% end %>
-<a href="/new">Register Here</a>
+		<%= f.label :password, "PASSWORD" %>
+		<%= f.password_field :password %>
+		
+		<%= f.submit "Sign In / Sign Up", class: "submit" %>
+	<% end %>
+</div>
