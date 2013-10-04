@@ -7,8 +7,7 @@ describe "UserPages" do
  	describe "index" do
  		before { visit signin_path }
 
- 		it { should have_selector("input[type=submit][value='Sign In']") }
- 		it { should have_link('Register Here') }
+ 		it { should have_selector("input[type=submit][value='Sign In / Sign Up']") }
  	end
 
  	describe "signup" do
