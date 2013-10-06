@@ -3,8 +3,9 @@ require 'spec_helper'
 describe User do
 	before do
 		@user = User.new(username: "example1", email: "example@me.com",
-										 password: "password", password_confirmation: "password")
+						 password: "password", password_confirmation: "password")
 	end
+	
 	subject { @user }
 
 	it { should respond_to(:username) }

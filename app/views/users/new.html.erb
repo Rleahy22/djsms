@@ -1,5 +1,5 @@
 <%= form_for @user do |f| %>
-	
+	<%= render 'shared/error_messages', object: f.object %>
 	<%= f.label :username, "Username" %>
 	<%= f.text_field :username %>
 
@@ -7,10 +7,10 @@
 	<%= f.text_field :email %>
 
 	<%= f.label :password, "Password" %>
-	<%= f.text_field :password %>
+	<%= f.password_field :password %>
 
 	<%= f.label :password_confirmation, "Confirm Password" %>
-	<%= f.text_field :password_confirmation %>
+	<%= f.password_field :password_confirmation %>
 
 	<%= f.submit "Sign Up" %>
 <% end %>
