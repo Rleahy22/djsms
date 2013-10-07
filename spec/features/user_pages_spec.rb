@@ -13,6 +13,13 @@ describe "UserPages" do
  			it "should not create a user" do
  				expect { click_button "Sign Up" }.not_to change(User, :count)
  			end
+
+ 			describe "after submission" do
+ 				before { click_button "Sign Up" }
+
+ 				it { should have_selector("input[type=submit][value='Sign Up']") }
+ 				it { should have_content('error') }
+ 			end
  		end
 
  		describe "with valid information" do
