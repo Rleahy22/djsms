@@ -1,7 +1,6 @@
 <div class="container">
 	<h1>DJ SMS</h1>
-
-	<%= form_for(:session, url: sessions_path) do |f| %>
+	<%= form_for(:session, url: sessions_path, html: {class: "login"}) do |f| %>
 
 		<%= f.label :email, "EMAIL" %>
 		<%= f.text_field :email %>
