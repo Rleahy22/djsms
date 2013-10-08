@@ -17,10 +17,12 @@ ActiveRecord::Schema.define(:version => 20131002001221) do
     t.string   "username"
     t.string   "email"
     t.string   "password_digest"
+    t.string   "remember_token"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["remember_token"], :name => "index_users_on_remember_token"
 
 end
