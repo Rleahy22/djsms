@@ -30,6 +30,11 @@ describe "AuthenticationPages" do
 			end
 
 			it { should have_selector('h1', text: user.username) }
+		
+			describe "followed by signout" do
+				before { click_link "Sign Out" }
+				it { should have_selector("input[type=submit][value='Sign In']") }
+			end
 		end
 	end
 end

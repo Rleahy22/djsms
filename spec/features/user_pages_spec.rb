@@ -35,6 +35,7 @@ describe "UserPages" do
  				let(:user) { User.find_by_email("example@me.com")}
 
  				it { should have_selector('h1', text: user.username) }
+ 				it { should have_link('Sign Out') }
  			end
 
  			it "should create a user" do
