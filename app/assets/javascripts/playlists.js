@@ -8,7 +8,7 @@ $(document).ready(function() {
 				tracks: "t32961632"
 			},
 			success: function(response) {
-				playlistPost(response.result['embedUrl'])
+				playlistPost(response.result['shortUrl'], response.result['embedUrl'])
 			},
 			error: function(response) {
 				console.log("error: " + response.message)
@@ -16,14 +16,14 @@ $(document).ready(function() {
 		})
 	}
 
-	var playlistPost = function(embedUrl) {
+	var playlistPost = function(shortUrl, embedUrl) {
 		$.post('/playlists',
 			{playlist: {title: $('input[name="playlist[title]"]').val(), 
 										 embed_url: embedUrl}},
 			function(data) {
 				$('.container').remove()
 			 	$('body').append(data)
-			 	$('body').append('<embed src="' + embedUrl + '" id=rdio-player">')
+			 	$('body').append('<iframe width="500" height="250" src="' + embedUrl + '" frameborder="0"></iframe>')
 			}
 		)
 	}
