@@ -9,7 +9,7 @@ a {
 }
 
 a:hover {
-	color: grey;
+	color: gray;
 }
 
 .nav {
@@ -82,6 +82,16 @@ h2 {
 	    1px 1px 0 #000;
 }
 
+h3 {
+	font-family: "Helvetica" Arial Sans-Serif;
+	color: white;
+	text-shadow:
+	    -1px -1px 0 #000,
+	    1px -1px 0 #000,
+	    -1px 1px 0 #000,
+	    1px 1px 0 #000;
+}
+
 form {
 	text-align: center;
 }
@@ -142,4 +152,9 @@ input {
 .signup-edit {
 	margin-top: 30px;
 	width: 400px;
+}
+
+.playlists {
+	margin: auto;
+	width: 900px;
 }

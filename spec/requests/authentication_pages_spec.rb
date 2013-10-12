@@ -67,6 +67,19 @@ describe "Authentication" do
 				  specify { response.should redirect_to(signin_path) }
 				end
 			end
+
+			describe "in the playlists controller" do
+
+				describe "submitting to the create action" do
+					before { post playlists_path }
+					specify { response.should redirect_to(signin_path) }
+				end
+
+				describe "submitting to the destroy action" do
+					before { delete playlist_path(FactoryGirl.create(:playlist)) }
+					specify { response.should redirect_to(signin_path) }
+				end
+			end
 		end
 
 		describe "as wrong user" do

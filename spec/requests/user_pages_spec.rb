@@ -9,17 +9,17 @@ describe "UserPages" do
 
 		it { should have_selector('h1', text: "All Users") }
 
-		describe "pagination" do
+		# describe "pagination" do
 
-			before(:all) { 30.times { FactoryGirl.create(:user) } }
-			after(:all) { User.delete_all }
+		# 	before(:all) { 30.times { FactoryGirl.create(:user) } }
+		# 	after(:all) { User.delete_all }
 
-			it "should list each user" do
-				User.paginate(page: 1).each do |user|
-					page.should have_selector('li', text: user.username)
-				end
-			end
-		end
+		# 	it "should list each user" do
+		# 		User.paginate(page: 1).each do |user|
+		# 			page.should have_selector('li', text: user.username)
+		# 		end
+		# 	end
+		# end
 	end
 
  	describe "signup" do
@@ -59,6 +59,21 @@ describe "UserPages" do
  			it "should create a user" do
  				expect { click_button "Sign Up" }.to change(User, :count).by(1)
  			end
+ 		end
+ 	end
+
+ 	describe "profile page" do
+ 		let(:user) { FactoryGirl.create(:user) }
+ 		let!(:p1) { FactoryGirl.create(:playlist, user: user, title: "Pop") }
+ 		let!(:p2) { FactoryGirl.create(:playlist, user: user, title: "Rock") }
+
+ 		before { visit user_path(user) }
+
+ 		it { should have_selector('h1', text: user.username) }
+
+ 		describe "playlists" do
+ 			it { should have_content(p1.title) }
+ 			it { should have_content(p2.title) }
  		end
  	end
 

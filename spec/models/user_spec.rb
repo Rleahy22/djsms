@@ -14,6 +14,8 @@ describe User do
 	it { should respond_to(:password) }
 	it { should respond_to(:password_confirmation) }
 	it { should respond_to(:remember_token) }
+	it { should respond_to(:authenticate) }
+	it { should respond_to(:playlists) }
 
 	describe "when username is not present" do
 		before { @user.username = "" }
@@ -86,4 +88,28 @@ describe User do
 		before { @user.password = @user.password_confirmation = "Password" }
 		it { should_not be_valid}
 	end
+
+	# describe "playlist associations" do
+
+	# 	before { @user.save }
+	# 	let!(:older_playlist) do
+	# 		FactoryGirl.create(:playlist, user: @user, created_at: 1.day.ago)
+	# 	end
+	# 	let!(:newer_playlist) do
+	# 		FactoryGirl.create(:playlist, user: @user, created_at: 1.hour.ago)
+	# 	end
+
+	# 	it "should have the playlists in the right order" do
+	# 		@user.playlists.should == [newer_playlist, older_playlist]
+	# 	end
+
+	# 	it "should destroy associated playlists" do
+	# 		playlists - @user.playlists.dup
+	# 		@user.destroy
+	# 		playlists.should_not be_empty
+	# 		playlists.each do |playlist|
+	# 			Playlist.find_by_id(playlist.id).should be_nil
+	# 		end
+	# 	end
+	# end
 end

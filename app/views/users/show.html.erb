@@ -1,1 +1,19 @@
-<h1><%= @user.username %></h1>
+<div class="container">
+	<h1><%= @user.username %></h1>
+
+	<%= render 'shared/playlist_form' if @playlist %>
+
+	<div class="playlists">
+		<% if @user.playlists.any? %>
+			<h2>Playlists:</h2>
+			<ul>
+				<% @playlists.each do |playlist| %>
+					<li>
+						<%= link_to playlist.title, playlist_path(playlist) %>
+					</li>
+				<% end %>
+			</ul>
+			<%= will_paginate @playlists %>
+		<% end %>
+	</div>
+</div>

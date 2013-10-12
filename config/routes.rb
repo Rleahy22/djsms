@@ -1,5 +1,6 @@
 Djsms::Application.routes.draw do
   resources :users
+  resources :playlists
   resources :sessions, only: [:new, :create, :destroy]
   root to: 'sessions#new'
   get '/helper.html', to: 'sessions#helper'

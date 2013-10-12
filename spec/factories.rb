@@ -5,4 +5,9 @@ FactoryGirl.define do
 		password "Password1"
 		password_confirmation "Password1"
 	end
+
+	factory :playlist do
+		title "Pop Hits"
+		user
+	end
 end
