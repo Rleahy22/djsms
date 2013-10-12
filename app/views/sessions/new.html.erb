@@ -2,14 +2,14 @@
 	<h1>DJ SMS</h1>
 	<%= form_for(:session, url: sessions_path, html: {class: "login"}) do |f| %>
 
-		<%= f.label :email, "EMAIL" %>
+		<%= f.label :email, "EMAIL", class: "signin-label" %>
 		<%= f.text_field :email %>
 
-		<%= f.label :password, "PASSWORD" %>
+		<%= f.label :password, "PASSWORD", class: "signin-label" %>
 		<%= f.password_field :password %>
 		
 		<%= f.submit "Sign In", class: "submit" %>
+		<%= link_to "Sign Up", new_user_path, class: "sign-up" %>
 	<% end %>
 
-	<%= link_to "Sign Up", new_user_path %>
 </div>

@@ -1,17 +1,17 @@
 <%= form_for @user do |f| %>
 	<%= render 'shared/error_messages', object: f.object %>
-	<%= f.label :username, "Username" %>
+	<%= f.label :username, "Username", class: "signup-label" %>
 	<%= f.text_field :username %>
 
-	<%= f.label :email, "Email" %>
+	<%= f.label :email, "Email", class: "signup-label" %>
 	<%= f.text_field :email %>
 
-	<%= f.label :password, "Password" %>
+	<%= f.label :password, "Password", class: "signup-label" %>
 	<%= f.password_field :password %>
 
-	<%= f.label :password_confirmation, "Confirm Password" %>
+	<%= f.label :password_confirmation, "Confirm Password", class: "signup-label" %>
 	<%= f.password_field :password_confirmation %>
 
-	<%= f.submit "Sign Up" %>
+	<%= f.submit "Sign Up", class: "signup-edit" %>
 <% end %>
   

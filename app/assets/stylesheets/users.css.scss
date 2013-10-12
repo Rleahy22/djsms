@@ -3,6 +3,54 @@ body {
 	background-size: cover;
 }
 
+a {
+	text-decoration: none;
+	color: white;
+}
+
+a:hover {
+	color: grey;
+}
+
+.nav {
+	position: fixed;
+	top: 0;
+	width: 100%;
+}
+
+.nav-link {
+	color: white;
+	text-decoration: none;
+	font-family: "Helvetica" Arial Sans-Serif;
+	font-size: 200%;
+	padding: 0 10px;
+}
+
+#errors {
+	color: red;
+	font-family: "Helvetica" Arial Sans-Serif;
+	font-size: 200%;
+	font-weight: bold;
+}
+
+ul {
+	list-style: none
+}
+
+li {
+	font-size: 200%;
+	font-family: "Helvetica" Arial Sans-Serif;
+	font-weight: bold;
+}
+
+#user-link:hover .settings{
+	visibility: visible;
+}
+
+.right-nav {
+	float: right;
+}
+
 .container {
 	width: 700px;
 	margin: 0 auto;
@@ -21,13 +69,25 @@ h1 {
 	    1px 1px 0 #000;
 }
 
+h2 {
+	margin-bottom: 20px;
+	font-family: "Helvetica" Arial Sans-Serif;
+	color: white;
+	font-size: 700%;
+	text-align: center;
+	text-shadow:
+	    -1px -1px 0 #000,
+	    1px -1px 0 #000,
+	    -1px 1px 0 #000,
+	    1px 1px 0 #000;
+}
+
 form {
 	text-align: center;
 }
 
 label {
 	color: white;
-	font-size: 700%;
 	font-weight: bolder;
 	text-shadow:
 	    -2px -2px 0 #000,
@@ -36,8 +96,12 @@ label {
 	    2px 2px 0 #000;
 }
 
+.signin-label {
+	font-size: 700%
+}
+
 input {
-	width: 620px;
+	width: 645px;
 	height: 50px;
 	font-size: 200%;
 	box-shadow: 1px 1px 5px #000;	
@@ -46,6 +110,36 @@ input {
 
 .submit {
 	margin-top: 10px;
+	width: 200px;
+	font-size: 200%;
+	display: inline-block;
+}
+
+.sign-up {
+	font-size: 200%;
+	color: black;
+	background-color: #E8E8E8;
+	text-decoration: none;
+	width: 200px;
+	padding: 6px 0 6px 0;
+	-webkit-appearance: button;
+}
+
+.new_user {
+	margin: 50px auto;
+	width: 700px;
+}
+
+.edit_user {
+	margin: 50px auto;
+	width: 700px;
+}
+
+.signup-label {
+	font-size: 350%
+}
+
+.signup-edit {
+	margin-top: 30px;
 	width: 400px;
-	font-size: 200%
 }

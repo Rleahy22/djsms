@@ -86,9 +86,4 @@ describe User do
 		before { @user.password = @user.password_confirmation = "Password" }
 		it { should_not be_valid}
 	end
-
-	describe "remember_token" do
-		before { @user.save }
-		its(:remember_token) { should_not be_blank}
-	end
 end

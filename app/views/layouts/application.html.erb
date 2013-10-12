@@ -8,6 +8,14 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+		<div class="nav">
+			<% if signed_in? %>
+				<%= link_to current_user.username, current_user, class: "nav-link", id: "user-link" %>
+				<%= link_to "Account Settings", edit_user_path(current_user), class: "nav-link" %>
+				<%= link_to "Sign Out", signout_path, method: "delete", class: "nav-link right-nav"%>
+				<%= link_to "All Users", users_path, class: "nav-link right-nav" %>
+		</div>
+	<% end %>
 	<% flash.each do |key, value| %>
     <%= content_tag(:div, value, class: "alert alert-#{key}") %>
   <% end %>
