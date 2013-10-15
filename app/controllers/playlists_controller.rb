@@ -1,8 +1,11 @@
 class PlaylistsController < ApplicationController
 	before_filter :signed_in_user, only: [:create, :destroy]
+	before_filter :correct_user, only: :destroy
 
 	def show
 		@playlist = Playlist.find(params[:id])
+		@current_user = current_user
+		@correct_user = correct_user?
 	end
 
 	def create
@@ -16,5 +19,18 @@ class PlaylistsController < ApplicationController
 	end
 
 	def destroy
+		@playlist.destroy
+		redirect_to user_path(current_user)
 	end
+
+	private
+
+		def correct_user
+			@playlist = current_user.playlists.find_by_id(params[:id])
+			redirect_to root_url if @playlist.nil?
+		end
+
+		def correct_user?
+			current_user.playlists.find_by_id(params[:id])
+		end
 end

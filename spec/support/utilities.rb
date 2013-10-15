@@ -6,3 +6,8 @@ def sign_in(user)
 	fill_in "PASSWORD", with: user.password
 	click_button "Sign In"
 end
+
+def sign_out
+	visit root_path
+	click_link "Sign Out"
+end

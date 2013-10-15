@@ -28,8 +28,23 @@ $(document).ready(function() {
 		)
 	}
 
+	var togglePlayPause = function() {
+		$('.play-visible').toggle()
+		$('.pause-visible').toggle()
+	}
+
 	$('.create-playlist').on('click', function(e) {
 		e.preventDefault()
 		newPlaylist($('input[name="playlist[title]"]').val())
+	})
+
+	$('.pause-visible').toggle()
+
+	$('.play-visible').on('click', function(){
+		togglePlayPause()
+	})
+
+	$('.pause-visible').on('click', function(){
+		togglePlayPause()
 	})
 })

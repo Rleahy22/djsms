@@ -1,3 +1,33 @@
-// Place all the styles related to the Playlists controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.player {
+	width: 900px;
+	height: 500px;
+	border: solid 5px white;
+	margin: auto;
+	position: relative
+}
+
+.controls {
+	position: absolute;
+	bottom: 0%;
+	border-top: solid 5px white;
+	width: 900px;
+	height: 60px;
+}
+
+.buttons {
+	margin: auto;
+	width: 248px;
+	height: 60px;
+	border-right: solid 5px white;
+	border-left: solid 5px white;
+}
+
+.player-buttons {
+	padding: 0 10px;
+	height: 60px;
+	width: auto;
+}
+
+.hidden {
+	visibility: hidden;
+}
