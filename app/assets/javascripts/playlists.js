@@ -1,5 +1,6 @@
 $(document).ready(function() {
 	var activePlaylist = {}
+	var ran = false
 
 	var newPlaylist = function(name) {
 		R.request({
@@ -49,12 +50,28 @@ $(document).ready(function() {
 		R.player.togglePause()
 	}
 
+	var firstSong = function(icon, artist, title) {
+		$('#song-list').append('<li class="playlist-song playing"><img src="' + icon + '" class="song-icon"><h3 class="song-info">' + artist + ' - ' + title + '</h3></li>')
+	}
+
+	var addSong = function(icon, artist, title) {
+		$('#song-list').append('<li class="playlist-song"><img src="' + icon + '" class="song-icon"><h3 class="song-info">' + artist + ' - ' + title + '</h3></li>')
+	}
+
 	var initPlayer = function() {
 		if ($('.player').length != 0) {
 			R.ready(function() {
 				R.player.play({source: $('.playlist-data').data('playlistid')})
 				activePlaylist = R.player.playingSource()
-				console.log(activePlaylist.attributes.tracks.models)
+				var songList = activePlaylist.attributes.tracks.models
+				songList.forEach(function(song) {
+					if (songList.indexOf(song) == 0) {
+						firstSong(song.attributes.icon, song.attributes.artist, song.attributes.name)
+					} else {
+						addSong(song.attributes.icon, song.attributes.artist, song.attributes.name)
+					}
+				})
+				$('.loading').hide()
 				setTimeout(function() {R.player.togglePause()}, 500)
 			})
 		}
@@ -99,9 +116,6 @@ $(document).ready(function() {
 		})
 	})
 
-	setTimeout(initPlayer, 2000)
+	initPlayer()
 
-	// R.player.play({source: $('.playlist-data').data('playlistid')})
-
-	$('#song-list').append('<li class="playlist-song playing"><img src="http://rdio-b.cdn3.rdio.com/album/2/8/4/000000000032d482/5/square-200.jpg" class="song-icon"><h3 class="song-info">Katy Perry - Roar</h3></li>')
 })

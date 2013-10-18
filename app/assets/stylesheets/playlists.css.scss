@@ -8,6 +8,13 @@
 	opacity: .8;
 }
 
+.loading {
+	width: 300px;
+	position: absolute;
+	top: 70px;
+	left: 300px;
+}
+
 #song-list {
 	margin-bottom: 0;
 	height: 440px;
@@ -60,7 +67,9 @@
 	display: inline-block;
 	height: 58px;
 	width: 885px;
-	border-bottom: 2px solid white
+	border-bottom: 2px solid white;
+	margin-top: -3px;
+	padding-right: 15px;
 }
 
 #details {
