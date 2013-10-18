@@ -5,14 +5,14 @@ describe Playlist do
 	let(:user) { FactoryGirl.create(:user) }
 	before do
 		@playlist = user.playlists.build(title: "Top 100",
-																		 embed_url: "http://rdio.com/whatever")
+																		 rdio_id: "p6780967")
 	end
 
 	subject { @playlist }
 
 	it { should respond_to(:title) }
 	it { should respond_to(:user_id) }
-	it { should respond_to(:embed_url) }
+	it { should respond_to(:rdio_id) }
 	it { should respond_to(:user) }
 	its(:user) { should == user }
 

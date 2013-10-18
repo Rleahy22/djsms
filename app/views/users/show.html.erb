@@ -9,7 +9,7 @@
 			<ul>
 				<% @playlists.each do |playlist| %>
 					<li>
-						<%= link_to playlist.title, playlist_path(playlist) %>
+						<%= link_to playlist.title, playlist_path(playlist), class: "view-playlist" %>
 					</li>
 				<% end %>
 			</ul>

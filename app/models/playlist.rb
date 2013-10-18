@@ -1,5 +1,5 @@
 class Playlist < ActiveRecord::Base
-  attr_accessible :title, :embed_url
+  attr_accessible :title, :rdio_id
   belongs_to :user
 
   validates :user_id, presence: true

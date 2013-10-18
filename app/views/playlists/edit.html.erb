@@ -1,0 +1,9 @@
+<h1><%= @playlist.title %></h1>
+
+<%= form_for(@playlist, html: {class: "edit-playlist"}) do |f| %>
+	
+	<%= f.label :title, "Rename Playlist", id: "rename" %>
+	<%= f.text_field :title %>
+
+	<%= f.submit "Update Playlist", id: "update" %>	
+<% end %>

@@ -6,6 +6,9 @@ describe "PlaylistPages" do
 
   let(:user) { FactoryGirl.create(:user) }
   let(:playlist) { FactoryGirl.create(:playlist, user: user, title: "Pop") }
+  let(:other_user) { FactoryGirl.create(:user,
+                                         username: "New",
+                                         email: "new@me.com")}
   before { sign_in user }
 
   describe "playlist creation" do
@@ -48,12 +51,10 @@ describe "PlaylistPages" do
     before { visit playlist_path(playlist) }
 
     it { should have_link('Delete Playlist') }
+    it { should have_link('Edit Playlist') }
   end
 
   describe "not as playlist owner" do
-    let(:other_user) { FactoryGirl.create(:user,
-                                         username: "New",
-                                         email: "new@me.com")}
     before do
       sign_out
       sign_in(other_user)
@@ -65,8 +66,30 @@ describe "PlaylistPages" do
 
   describe "deleting a playlist" do
     before { visit playlist_path(playlist) }
+    
     it "should delete the playlist" do
       expect { click_link "Delete Playlist" }.to change(Playlist, :count).by(-1)
+    end
+  end
+
+  describe "edit" do
+
+    describe "as wrong user" do
+      before do
+        sign_out
+        sign_in(other_user)
+        visit edit_playlist_path(playlist)
+      end
+
+      it { should_not have_selector('h1', text: playlist.title) }
+      it { should have_selector('h1', text: other_user.username) }
+    end
+
+    describe "as playlist owner" do
+      before { visit edit_playlist_path(playlist) }
+
+      it {should have_selector('h1', text: playlist.title) }
+      it { should have_selector("input[type=submit][value='Update Playlist']") }
     end
   end
 end

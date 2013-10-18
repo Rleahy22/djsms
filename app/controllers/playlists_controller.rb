@@ -1,6 +1,6 @@
 class PlaylistsController < ApplicationController
 	before_filter :signed_in_user, only: [:create, :destroy]
-	before_filter :correct_user, only: :destroy
+	before_filter :correct_user, only: [:destroy, :edit]
 
 	def show
 		@playlist = Playlist.find(params[:id])
@@ -21,6 +21,9 @@ class PlaylistsController < ApplicationController
 	def destroy
 		@playlist.destroy
 		redirect_to user_path(current_user)
+	end
+
+	def edit
 	end
 
 	private
