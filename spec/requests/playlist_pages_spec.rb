@@ -22,7 +22,6 @@ describe "PlaylistPages" do
 
   		describe "error messages" do
   			before { click_button "Create Playlist" }
-  			it { should have_content('*') }
   		end
   	end
 
@@ -82,7 +81,7 @@ describe "PlaylistPages" do
       end
 
       it { should_not have_selector('h1', text: playlist.title) }
-      it { should have_selector('h1', text: other_user.username) }
+      it { should have_selector('h1', text: "DJ SMS") }
     end
 
     describe "as playlist owner" do
@@ -90,6 +89,24 @@ describe "PlaylistPages" do
 
       it {should have_selector('h1', text: playlist.title) }
       it { should have_selector("input[type=submit][value='Update Playlist']") }
+
+      describe "with invalid information" do
+        before do
+          fill_in "Rename Playlist", with: ""
+          click_button "Update Playlist"
+        end
+
+        it { should have_selector("h1", text: playlist.title) } 
+      end
+
+      describe "with valid information" do
+        before do
+          fill_in "Rename Playlist", with: "New Title"
+          click_button "Update Playlist"
+        end
+
+        it { should have_selector('h1', text: "New Title") }
+      end
     end
   end
 end

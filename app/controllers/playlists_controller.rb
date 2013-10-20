@@ -1,6 +1,6 @@
 class PlaylistsController < ApplicationController
 	before_filter :signed_in_user, only: [:create, :destroy]
-	before_filter :correct_user, only: [:destroy, :edit]
+	before_filter :correct_user, only: [:destroy, :edit, :update]
 
 	def show
 		@playlist = Playlist.find(params[:id])
@@ -14,7 +14,7 @@ class PlaylistsController < ApplicationController
 			flash[:success] = "Playlist Created"
 			redirect_to playlist_path(@playlist)
 		else
-			redirect_to user_path(current_user)
+			redirect_to current_user
 		end
 	end
 
@@ -24,6 +24,15 @@ class PlaylistsController < ApplicationController
 	end
 
 	def edit
+	end
+
+	def update
+		if @playlist.update_attributes(params[:playlist])
+			flash[:success] = "Playlist Updated"
+			redirect_to @playlist
+		else
+			redirect_to edit_playlist_path(@playlist)
+		end
 	end
 
 	private
