@@ -44,4 +44,19 @@ $(document).ready(function() {
 			}							
 		)
 	})
+
+	if ($('#active').data('active') == true) {
+		console.log('hey')
+		var userID = $('#active').data('user').id
+		console.log(userID)
+		$.get('users/' + userID, function(data) {
+			$('.container').remove()
+			$('body').append(data)
+		})
+		R.authenticate(function(auth) {
+			if (auth === true) {
+				logIn()
+			}
+		})
+	}
 })

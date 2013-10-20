@@ -12,4 +12,8 @@
 		<%= link_to "Sign Up", new_user_path, class: "sign-up" %>
 	<% end %>
 
+	<%= content_tag "div", id: "active", data: {active: @redirect, user: @user} do %>
+	<% end %>
+	<p><%= @redirect %></p>
+
 </div>

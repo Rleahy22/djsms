@@ -1,7 +1,8 @@
 class SessionsController < ApplicationController
 	def new
 		if signed_in?
-			redirect_to current_user
+			@user = current_user
+			@redirect = true
 		end
 	end
 
