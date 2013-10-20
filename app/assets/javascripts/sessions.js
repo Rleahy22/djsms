@@ -45,6 +45,33 @@ $(document).ready(function() {
 		)
 	})
 
+	$('#user-link').on('click', function(e) {
+		e.preventDefault()
+		alert('hey')
+		var route = $(this).attr('href')
+		$.get(route, function(data) {
+			$('.container').remove()
+			$('body').append(data)
+		})
+	})
+
+	$('#user-index').on('click', function(e) {
+		e.preventDefault()
+		$.get('/users', function(data) {
+			$('.container').remove()
+			$('body').append(data)
+		})
+	})
+
+	$('#edit-playlist').on('click', function(e) {
+		e.preventDefault()
+		var route = $(this).attr('href')
+		$.get(route, function(data) {
+			$('.playlist-container').remove()
+			$('body').append(data)
+		})
+	})
+
 	if ($('#active').data('active') == true) {
 		console.log('hey')
 		var userID = $('#active').data('user').id

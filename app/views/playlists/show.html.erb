@@ -1,22 +1,24 @@
-<h1><%= @playlist.title %></h1>
-<%= content_tag :div, class: "playlist-data", data: {playlistid: @playlist.rdio_id} do %>
-<% end %>
+<div class="playlist-container">
+	<h1><%= @playlist.title %></h1>
+	<%= content_tag :div, class: "playlist-data", data: {playlistid: @playlist.rdio_id} do %>
+	<% end %>
 
-<div class="player">
-	<%= image_tag("loading.gif", class: "loading") %>
-	<ul id="song-list">
-		
-	</ul>
-	<div class="controls">
-		<div class="buttons">
-			<%= image_tag("previous.png", class: "player-buttons previous") %>
-			<%= image_tag("play.png", class: "player-buttons play-visible") %>
-			<%= image_tag("pause.png", class: "player-buttons pause-visible") %>
-			<%= image_tag("next.png", class: "player-buttons next") %>
+	<div class="player">
+		<%= image_tag("loading.gif", class: "loading") %>
+		<ul id="song-list">
+			
+		</ul>
+		<div class="controls">
+			<div class="buttons">
+				<%= image_tag("previous.png", class: "player-buttons previous") %>
+				<%= image_tag("play.png", class: "player-buttons play-visible") %>
+				<%= image_tag("pause.png", class: "player-buttons pause-visible") %>
+				<%= image_tag("next.png", class: "player-buttons next") %>
+			</div>
 		</div>
 	</div>
+	<% if @correct_user %>
+		<%= link_to "Delete Playlist", @playlist, method: "delete", data: { confirm: "Are you sure you want to delete playlist, #{@playlist.title}?" }, class: "playlist-link", id: "delete-playlist" %>
+		<%= link_to "Edit Playlist", edit_playlist_path(@playlist), class: "playlist-link", id: "edit-playlist" %>
+	<% end %>
 </div>
-<% if @correct_user %>
-	<%= link_to "Delete Playlist", @playlist, method: "delete", data: { confirm: "Are you sure you want to delete playlist, #{@playlist.title}?" }, class: "playlist-link", id: "delete-playlist" %>
-	<%= link_to "Edit Playlist", edit_playlist_path(@playlist), class: "playlist-link", id: "edit-playlist" %>
-<% end %>

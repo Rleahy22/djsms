@@ -1,9 +1,11 @@
-<h1><%= @playlist.title %></h1>
+<div class="container">
+	<h1><%= @playlist.title %></h1>
 
-<%= form_for(@playlist, html: {class: "edit-playlist"}) do |f| %>
-	<%= render 'shared/error_messages', object: f.object %>
-	<%= f.label :title, "Rename Playlist", id: "rename" %>
-	<%= f.text_field :title %>
+	<%= form_for(@playlist, html: {class: "edit-playlist"}) do |f| %>
+		<%= render 'shared/error_messages', object: f.object %>
+		<%= f.label :title, "Rename Playlist", id: "rename" %>
+		<%= f.text_field :title %>
 
-	<%= f.submit "Update Playlist", id: "update" %>	
-<% end %>
+		<%= f.submit "Update Playlist", id: "update" %>	
+	<% end %>
+</div>

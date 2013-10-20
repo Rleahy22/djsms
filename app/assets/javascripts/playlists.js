@@ -109,12 +109,25 @@ $(document).ready(function() {
 
 	$('.view-playlist').on('click', function(e) {
 		e.preventDefault()
-		var playlistUrl = $(this).attr('href')
-		$.get(playlistUrl, function(data) {
+		var route = $(this).attr('href')
+		$.get(route, function(data) {
 			$('.container').remove()
 			$('body').append(data)
 		})
 	})
+
+	// $('#update').on('click', function(e) {
+	// 	e.preventDefault()
+	// 	var route = $(this).parent()[0].action.replace("http://localhost:3000", "")
+	// 	console.log(route)
+	// 	$.post(route, 
+	// 		{playlist: {title: $('input[name="playlist[title]"]').val()}},
+	// 		function(data) {
+	// 			$('.container').remove()
+	// 			$('body').append(data)
+	// 		}
+	// 	)
+	// })
 
 	initPlayer()
 
