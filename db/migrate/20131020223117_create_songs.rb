@@ -1,6 +1,7 @@
 class CreateSongs < ActiveRecord::Migration
   def change
     create_table :songs do |t|
+    	t.string :query
     	t.string :key
       t.string :name
       t.string :artist

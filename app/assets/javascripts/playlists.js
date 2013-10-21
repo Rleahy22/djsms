@@ -1,6 +1,7 @@
 $(document).ready(function() {
 	var activePlaylist = {}
 	var ran = false
+	var song = {}
 
 	var newPlaylist = function(name) {
 		R.request({
@@ -115,6 +116,42 @@ $(document).ready(function() {
 			$('body').append(data)
 		})
 	})
+
+	$('#submit-search').on('click', function(e) {
+		e.preventDefault()
+		R.ready(function(){
+      R.request({
+        method: "search",
+        content: {
+                query: $('input[name="song[query]"]').val(),
+                types: "track"
+        },
+        success: function(response) {
+                song = response.result.results[0]
+                $('.search-results').toggle()
+                $('.search-results').append('<img src="' + song.icon + '" class="song-icon"><button id="add-song">Add Song</button><h3 class="song-info">' + song.name + ' - ' + song.artist + '</h3>')
+								$('#add-song').on('click', function() {
+									alert(song.key + ' ' + song.name + ' ' + song.artist + ' ' + song.icon)
+									$.post('/songs', 
+										{song: {query: $('input[name="song[query]"]').val(),
+														key: song.key,
+														name: song.name,
+														artist: song.artist,
+														icon: song.icon}},
+										function(data) {
+											$('.playlist-container').remove()
+			 								$('body').append(data)
+										}
+									)
+								})
+        },
+        error: function(response) {
+                console.log("error " + response.message)
+        }
+      })
+    })
+	})
+
 
 	// $('#update').on('click', function(e) {
 	// 	e.preventDefault()

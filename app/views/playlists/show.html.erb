@@ -3,6 +3,20 @@
 	<%= content_tag :div, class: "playlist-data", data: {playlistid: @playlist.rdio_id} do %>
 	<% end %>
 
+	<div class="search">
+		<%= form_for @song do |f| %>
+			<%= f.text_field :query, placeholder: "(Song Name - Artist)" %>
+			<%= f.hidden_field :key %>
+			<%= f.hidden_field :name %>
+			<%= f.hidden_field :artist %>
+			<%= f.hidden_field :icon %>
+			<%= f.submit "Search", id: "submit-search" %>
+		<% end %>
+
+		<%= content_tag :div, class: "search-results" do %>
+		<% end %>
+	</div>
+
 	<div class="player">
 		<%= image_tag("loading.gif", class: "loading") %>
 		<ul id="song-list">

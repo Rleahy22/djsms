@@ -6,6 +6,7 @@ class PlaylistsController < ApplicationController
 		@playlist = Playlist.find(params[:id])
 		@current_user = current_user
 		@correct_user = correct_user?
+		@song = Song.new
 	end
 
 	def create

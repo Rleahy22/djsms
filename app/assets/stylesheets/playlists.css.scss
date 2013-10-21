@@ -1,3 +1,60 @@
+.search {
+	width: 900px;
+	margin: auto;
+}
+
+.new_song {
+	margin-bottom: 40px;
+}
+
+#song_query {
+	width: 670px;
+	text-align: center;
+}
+
+#submit-search {
+	width: 200px;
+}
+
+.search-results {
+	display: none;
+	width: 670px;
+	height: 58px;
+	margin: -44px 0 20px 6px;
+	background-color: maroon;
+	opacity: .8;
+	border: solid 2px white;
+}
+
+.search-results h3 {
+	color: white;
+	text-shadow:
+	    -1px -1px 0 black,
+	    1px -1px 0 black,
+	    -1px 1px 0 black,
+	    1px 1px 0 black;
+	font-family: "Helvetica" Arial Sans-Serif;
+	font-size: 100%;
+	width: 460px;
+	padding: 20px 0 0 0;
+	float: right;
+	display: inline-block;
+}
+
+#add-song {
+	width: 150px;
+	height: 59px;
+	float: right;
+	font-family: "Helvetica" Arial Sans-Serif;
+	font-size: 150%;
+	font-weight: bold;
+	text-shadow:
+	    -1px -1px 0 white,
+	    1px -1px 0 white,
+	    -1px 1px 0 white,
+	    1px 1px 0 white;
+}
+
 .player {
 	width: 900px;
 	height: 500px;
