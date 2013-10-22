@@ -21,9 +21,9 @@
 		<ul id="song-list">
 		<% @playlist.songs.each do |song| %>
 			<% if song == @playlist.songs.first %>
-				<li class="playlist-song playing"><img src="<%= song.icon %>" class="song-icon"><h3 class="song-info"><%= song.name %> - <%= song.artist %></h3></li>
+				<li class="playlist-song playing <%= song.key %>"><img src="<%= song.icon %>" class="song-icon"><h3 class="song-info"><%= song.name %> - <%= song.artist %></h3></li>
 			<% else %>
-				<li class="playlist-song"><img src="<%= song.icon %>" class="song-icon"><h3 class="song-info"><%= song.name %> - <%= song.artist %></h3></li>
+				<li class="playlist-song <%= song.key %>"><img src="<%= song.icon %>" class="song-icon"><h3 class="song-info"><%= song.name %> - <%= song.artist %></h3></li>
 			<% end %>
 		<% end %>
 		</ul>

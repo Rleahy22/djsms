@@ -52,11 +52,12 @@ $(document).ready(function() {
 	}
 
 	var initPlayer = function() {
-		if ($('.player').length != 0) {
-			R.ready(function() {
-				R.player.queue.addPlayingSource($('.playlist-data').data('playlistrdioid'))
-			})
-		}
+		// if ($('.player').length != 0) {
+		// 	alert ($('.playlist-data').data('playlistrdioid'))
+		// 	R.ready(function() {
+		// 		R.player.queue.add($('.playlist-data').data('playlistrdioid'))
+		// 	})
+		// }
 	}
 
 	var addSongToRdio = function(key) {
@@ -94,6 +95,14 @@ $(document).ready(function() {
 		})
 	}
 
+	var watchForSongChange = function() {
+		R.player.on("change:playingTrack", function(newSong) {
+		  var currentKey = newSong.attributes.key
+		  $('.playing').removeClass("playing")
+		  $('.' + currentKey).addClass("playing")
+		});
+	}
+
 	$('.create-playlist').on('click', function(e) {
 		e.preventDefault()
 		newPlaylist($('input[name="playlist[title]"]').val())
@@ -102,7 +111,15 @@ $(document).ready(function() {
 	$('.pause-visible').toggle()
 
 	$('.play-visible').on('click', function() {
-		togglePlayPause()
+		if (ran == false) {
+			R.player.play({source: $('.playlist-data').data('playlistrdioid')})
+			$('.play-visible').toggle()
+			$('.pause-visible').toggle()
+			watchForSongChange()
+			ran = true
+		} else {
+			togglePlayPause()
+		}
 	})
 
 	$('.pause-visible').on('click', function() {
@@ -111,17 +128,10 @@ $(document).ready(function() {
 
 	$('.previous').on('click', function() {
 		R.player.previous()
-		var currentSong = $('.playing')
-		// if (R.player.playingTrack().attributes.key == currentSong.previous().data('key'))
-		currentSong.removeClass("playing")
-		currentSong.prev().addClass("playing")
 	})
 
 	$('.next').on('click', function() {
 		R.player.next()
-		var currentSong = $('.playing')
-		currentSong.removeClass("playing")
-		currentSong.next().addClass("playing")
 	})
 
 	$('.view-playlist').on('click', function(e) {
@@ -135,6 +145,10 @@ $(document).ready(function() {
 
 	$('#submit-search').on('click', function(e) {
 		e.preventDefault()
+		if ($('.search-results').css('display') != 'none') {
+			$('.search-results').toggle()
+		}
+		$('.search-results').html('')
 		R.ready(function(){
       R.request({
         method: "search",
@@ -152,7 +166,6 @@ $(document).ready(function() {
       })
     })
 	})
-
 
 	// $('#update').on('click', function(e) {
 	// 	e.preventDefault()
