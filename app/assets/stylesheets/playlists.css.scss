@@ -149,6 +149,20 @@
 	padding: 7px;
 }
 
+.song-marquee {
+	text-align: center;
+	float: right;
+	margin: 0;
+	width: 800px;
+	padding: 7px;
+	color: white;
+	text-shadow:
+	    -1px -1px 0 black,
+	    1px -1px 0 black,
+	    -1px 1px 0 black,
+	    1px 1px 0 black;
+}
+
 .playing {
 	background-color: silver;
 }
