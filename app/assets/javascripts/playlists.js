@@ -65,6 +65,7 @@ $(document).ready(function() {
       },
       success: function(response) {
                 console.log(response)
+                R.player.queue.add(key)
       },
       error: function(response) {
               console.log("error " + response.message)
@@ -86,7 +87,7 @@ $(document).ready(function() {
 								icon: song.icon},
 				 playlist: $('.playlist-data').data('playlistid')},
 				function() {
-						$('#song-list').append('<li class="playlist-song"><img src="' + song.icon + '" class="song-icon"><h3 class="song-info">' + song.name + ' - ' + song.artist + '</h3></li>')
+						$('#song-list').append('<li class="playlist-song ' + song.key + '"><img src="' + song.icon + '" class="song-icon"><h3 class="song-info">' + song.name + ' - ' + song.artist + '</h3></li>')
 						$('.search-results').toggle()
 				}
 			)
@@ -195,17 +196,18 @@ $(document).ready(function() {
 	// 	)
 	// })
 
-	$('.playlist-song').on('dblclick', function() {
+	$('.player').on('dblclick', '.playlist-song', function() {
 		R.player.play({source: $('.playlist-data').data('playlistrdioid'), index: $(this).index()})
-		$('.play-visible').toggle()
-		$('.pause-visible').toggle()
+		if (R.player.playState() == 0) {
+			$('.play-visible').toggle()
+			$('.pause-visible').toggle()
+		}
 		watchForSongChange()
 		watchForSourceChange()
 		ran = true
 	})
 	
 	if ($('.player').length != 0) {
-		alert('swag')
 		setTimeout(function() {$('#playing-marquee-left').show()}, 5000)
 	}
 })
