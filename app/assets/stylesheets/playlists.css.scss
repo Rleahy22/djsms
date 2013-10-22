@@ -79,20 +79,25 @@
 }
 
 .controls {
-	position: absolute;
+	position: relative;
 	bottom: 0%;
 	border-top: solid 5px white;
+	border-bottom: solid 5px white;
 	width: 900px;
 	height: 60px;
 	background-color: black
 }
 
 .buttons {
+	position: relative;
+	top: 0;
+	background-color: black;
 	margin: auto;
 	width: 248px;
 	height: 60px;
 	border-right: solid 5px white;
 	border-left: solid 5px white;
+	z-index: 1;
 }
 
 .player-buttons {
@@ -176,6 +181,15 @@
 	    1px 1px 0 white;
 }
 
+.playing marquee {
+	color: black;
+	text-shadow:
+	    -1px -1px 0 white,
+	    1px -1px 0 white,
+	    -1px 1px 0 white,
+	    1px 1px 0 white;
+}
+
 .edit-playlist {
 	width: 700px;
 	margin: 100px auto
@@ -188,4 +202,29 @@
 
 #update {
 	width: 650px;
+}
+
+#playing-marquee-left {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 326px;
+	z-index: 9001;
+	font-family: "Helvetica" Arial Sans-Serif;
+	color: white;
+	font-size: 200%;
+	display: none;
+	padding-top: 10px;
+}
+
+#playing-marquee-right {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 326px;
+	z-index: 9001;
+	font-family: "Helvetica" Arial Sans-Serif;
+	color: white;
+	font-size: 200%;
+	padding-top: 10px;
 }

@@ -57,15 +57,6 @@ $(document).ready(function() {
 		R.player.pause()
 	}
 
-	var initPlayer = function() {
-		// if ($('.player').length != 0) {
-		// 	alert ($('.playlist-data').data('playlistrdioid'))
-		// 	R.ready(function() {
-		// 		R.player.queue.add($('.playlist-data').data('playlistrdioid'))
-		// 	})
-		// }
-	}
-
 	var addSongToRdio = function(key) {
 		R.request({
       method: "addToPlaylist",
@@ -107,6 +98,8 @@ $(document).ready(function() {
 		  var currentKey = newSong.attributes.key
 		  $('.playing').removeClass("playing")
 		  $('.' + currentKey).addClass("playing")
+		  $('#playing-marquee-left').html(newSong.attributes.name + ' - ' + newSong.attributes.artist)
+		  $('#playing-marquee-right').html(newSong.attributes.name + ' - ' + newSong.attributes.artist)
 		});
 	}
 
@@ -195,7 +188,9 @@ $(document).ready(function() {
 	// 		}
 	// 	)
 	// })
-
-	initPlayer()
-
+	
+	if ($('.player').length != 0) {
+		alert('swag')
+		setTimeout(function() {$('#playing-marquee-left').show()}, 5000)
+	}
 })
