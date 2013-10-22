@@ -4,8 +4,14 @@ describe Playlist do
 
 	let(:user) { FactoryGirl.create(:user) }
 	before do
-		@playlist = user.playlists.build(title: "Top 100",
+		@playlist = user.playlists.create!(title: "Top 100",
 																		 rdio_id: "p6780967")
+		@song = Song.create!(query: "Black Skinhead - Kanye West",
+										 key: "t32961632",
+										 name: "Black Skinhead",
+										 artist: "Kanye West",
+										 icon: "http://http://rdio-c.cdn3.rdio.com/album/5/c/4/00000000002fa4c5/2/square-200.jpg")
+		@playlist.songs << @song
 	end
 
 	subject { @playlist }
@@ -17,6 +23,15 @@ describe Playlist do
 	its(:user) { should == user }
 
 	it { should be_valid }
+
+	it "should have created a relationship" do
+		PlaylistsSong.first.playlist.should == @playlist
+		PlaylistsSong.first.song.should == @song
+	end
+
+	it "should have songs" do
+		@playlist.songs.should == [@song]
+	end
 
 	describe "when user_id is not present" do
 		before { @playlist.user_id = nil }

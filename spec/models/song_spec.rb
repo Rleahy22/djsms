@@ -2,13 +2,15 @@ require 'spec_helper'
 
 describe Song do
 	let(:user) { FactoryGirl.create(:user) }
-	let(:playlist) { user.playlists.build(title: "Top 100",
-																		 rdio_id: "p6780967") }
+	let(:playlist) { user.playlists.create!(title: "Top 100",
+																		 		rdio_id: "p6780967") }
 	before do
-		@song = Song.new(key: "t32961632",
+		@song = Song.create!(query: "Black Skinhead - Kanye West",
+										 key: "t32961632",
 										 name: "Black Skinhead",
 										 artist: "Kanye West",
 										 icon: "http://http://rdio-c.cdn3.rdio.com/album/5/c/4/00000000002fa4c5/2/square-200.jpg")
+		playlist.songs << @song
 	end
 
 	subject { @song }
@@ -19,6 +21,15 @@ describe Song do
 	it { should respond_to(:icon) }
 
 	it { should be_valid }
+
+	it "should have created a relationship" do
+		PlaylistsSong.first.playlist.should == playlist
+		PlaylistsSong.first.song.should == @song
+	end
+
+	it "should have playlists" do
+		@song.playlists.should == [playlist]
+	end
 
 	describe "when key is not present" do
 		before { @song.key = "" }

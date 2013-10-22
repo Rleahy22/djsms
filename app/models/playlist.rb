@@ -1,6 +1,9 @@
 class Playlist < ActiveRecord::Base
   attr_accessible :title, :rdio_id
+
   belongs_to :user
+  has_many :playlists_songs
+  has_many :songs, through: :playlists_songs
 
   validates :user_id, presence: true
   validates :title, 	presence: true, length: { maximum: 50 } 
