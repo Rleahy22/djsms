@@ -5,7 +5,9 @@ class SongsController < ApplicationController
 
 	def create
 		@song = Song.new(params[:song])
+		@playlist = Playlist.find(params[:playlist])
 		if @song.save
+			@playlist.songs << @song
 			flash[:succes] = "Song Added"
 			redirect_to song_path(@song)
 		else

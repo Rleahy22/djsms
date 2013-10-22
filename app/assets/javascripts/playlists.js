@@ -9,7 +9,7 @@ $(document).ready(function() {
 			content: {
 				name: name,
 				description: "This playlist was created by DJ SMS",
-				tracks: "t32961632"
+				tracks: ""
 			},
 			success: function(response) {
 				playlistPost(response.result['key'])
@@ -51,31 +51,47 @@ $(document).ready(function() {
 		R.player.togglePause()
 	}
 
-	var firstSong = function(icon, artist, title) {
-		$('#song-list').append('<li class="playlist-song playing"><img src="' + icon + '" class="song-icon"><h3 class="song-info">' + artist + ' - ' + title + '</h3></li>')
-	}
-
-	var addSong = function(icon, artist, title) {
-		$('#song-list').append('<li class="playlist-song"><img src="' + icon + '" class="song-icon"><h3 class="song-info">' + artist + ' - ' + title + '</h3></li>')
-	}
-
 	var initPlayer = function() {
 		if ($('.player').length != 0) {
 			R.ready(function() {
-				R.player.play({source: $('.playlist-data').data('playlistid')})
-				activePlaylist = R.player.playingSource()
-				var songList = activePlaylist.attributes.tracks.models
-				songList.forEach(function(song) {
-					if (songList.indexOf(song) == 0) {
-						firstSong(song.attributes.icon, song.attributes.artist, song.attributes.name)
-					} else {
-						addSong(song.attributes.icon, song.attributes.artist, song.attributes.name)
-					}
-				})
-				$('.loading').hide()
-				setTimeout(function() {R.player.togglePause()}, 500)
+				R.player.queue.addPlayingSource($('.playlist-data').data('playlistrdioid'))
 			})
 		}
+	}
+
+	var addSongToRdio = function(key) {
+		R.request({
+      method: "addToPlaylist",
+      content: {playlist: $('.playlist-data').data('playlistrdioid'),
+              	tracks: key
+      },
+      success: function(response) {
+                console.log(response)
+      },
+      error: function(response) {
+              console.log("error " + response.message)
+      }
+    })
+	}
+
+	var addSongToDJSMS = function(song) {
+		$('.search-results').toggle()
+    $('.search-results').append('<img src="' + song.icon + '" class="song-icon"><button id="add-song">Add Song</button><h3 class="song-info">' + song.name + ' - ' + song.artist + '</h3>')
+		$('#add-song').on('click', function() {
+			addSongToRdio(song.key)
+			$.post('/songs', 
+				{song: {query: $('input[name="song[query]"]').val(),
+								key: song.key,
+								name: song.name,
+								artist: song.artist,
+								icon: song.icon},
+				 playlist: $('.playlist-data').data('playlistid')},
+				function() {
+						$('#song-list').append('<li class="playlist-song"><img src="' + song.icon + '" class="song-icon"><h3 class="song-info">' + song.name + ' - ' + song.artist + '</h3></li>')
+						$('.search-results').toggle()
+				}
+			)
+		})
 	}
 
 	$('.create-playlist').on('click', function(e) {
@@ -128,22 +144,7 @@ $(document).ready(function() {
         },
         success: function(response) {
                 song = response.result.results[0]
-                $('.search-results').toggle()
-                $('.search-results').append('<img src="' + song.icon + '" class="song-icon"><button id="add-song">Add Song</button><h3 class="song-info">' + song.name + ' - ' + song.artist + '</h3>')
-								$('#add-song').on('click', function() {
-									alert(song.key + ' ' + song.name + ' ' + song.artist + ' ' + song.icon)
-									$.post('/songs', 
-										{song: {query: $('input[name="song[query]"]').val(),
-														key: song.key,
-														name: song.name,
-														artist: song.artist,
-														icon: song.icon}},
-										function(data) {
-											$('.playlist-container').remove()
-			 								$('body').append(data)
-										}
-									)
-								})
+                addSongToDJSMS(song)
         },
         error: function(response) {
                 console.log("error " + response.message)

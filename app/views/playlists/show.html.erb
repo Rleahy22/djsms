@@ -1,6 +1,6 @@
 <div class="playlist-container">
 	<h1><%= @playlist.title %></h1>
-	<%= content_tag :div, class: "playlist-data", data: {playlistid: @playlist.rdio_id} do %>
+	<%= content_tag :div, class: "playlist-data", data: {playlistrdioid: @playlist.rdio_id, playlistid: @playlist.id} do %>
 	<% end %>
 
 	<div class="search">
@@ -18,9 +18,14 @@
 	</div>
 
 	<div class="player">
-		<%= image_tag("loading.gif", class: "loading") %>
 		<ul id="song-list">
-			
+		<% @playlist.songs.each do |song| %>
+			<% if song == @playlist.songs.first %>
+				<li class="playlist-song playing"><img src="<%= song.icon %>" class="song-icon"><h3 class="song-info"><%= song.name %> - <%= song.artist %></h3></li>
+			<% else %>
+				<li class="playlist-song"><img src="<%= song.icon %>" class="song-icon"><h3 class="song-info"><%= song.name %> - <%= song.artist %></h3></li>
+			<% end %>
+		<% end %>
 		</ul>
 		<div class="controls">
 			<div class="buttons">
