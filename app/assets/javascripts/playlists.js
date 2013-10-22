@@ -79,6 +79,7 @@ $(document).ready(function() {
 		$('.search-results').toggle()
     $('.search-results').append('<img src="' + song.icon + '" class="song-icon"><button id="add-song">Add Song</button><h3 class="song-info">' + song.name + ' - ' + song.artist + '</h3>')
 		$('#add-song').on('click', function() {
+			$('input[name="song[query]"]').val('')
 			addSongToRdio(song.key)
 			$.post('/songs', 
 				{song: {query: $('input[name="song[query]"]').val(),
