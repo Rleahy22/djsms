@@ -158,29 +158,13 @@
   user-select: none; 
 }
 
+.song-long {
+	font-size: 75%;
+	overflow: hidden;
+	padding-top: 13px;
+}
+
 .song-info:hover {
-	cursor: pointer;
-}
-
-.song-marquee {
-	text-align: center;
-	float: right;
-	margin: 0;
-	width: 800px;
-	padding: 7px;
-	color: white;
-	text-shadow:
-	    -1px -1px 0 black,
-	    1px -1px 0 black,
-	    -1px 1px 0 black,
-	    1px 1px 0 black;
-  -moz-user-select: none;
-  -khtml-user-select: none;
-  -webkit-user-select: none;
-  user-select: none;
-}
-
-.song-marquee:hover {
 	cursor: pointer;
 }
 
