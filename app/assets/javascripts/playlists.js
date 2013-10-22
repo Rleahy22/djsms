@@ -51,6 +51,12 @@ $(document).ready(function() {
 		R.player.togglePause()
 	}
 
+	var stopPlayer = function() {
+		$('.play-visible').show()
+		$('.pause-visible').hide()
+		R.player.pause()
+	}
+
 	var initPlayer = function() {
 		// if ($('.player').length != 0) {
 		// 	alert ($('.playlist-data').data('playlistrdioid'))
@@ -104,6 +110,14 @@ $(document).ready(function() {
 		});
 	}
 
+	var watchForSourceChange = function() {
+		R.player.on("change:playingSource", function(newSource) {
+			if (newSource.attributes.key != $('.playlist-data').data('playlistrdioid')) {
+				stopPlayer()
+			}
+		})
+	}
+
 	$('.create-playlist').on('click', function(e) {
 		e.preventDefault()
 		newPlaylist($('input[name="playlist[title]"]').val())
@@ -112,11 +126,12 @@ $(document).ready(function() {
 	$('.pause-visible').toggle()
 
 	$('.play-visible').on('click', function() {
-		if (ran == false) {
+		if (ran == false || R.player.playingSource() != $('.playlist-data').data('playlistrdioid')) {
 			R.player.play({source: $('.playlist-data').data('playlistrdioid')})
 			$('.play-visible').toggle()
 			$('.pause-visible').toggle()
 			watchForSongChange()
+			watchForSourceChange()
 			ran = true
 		} else {
 			togglePlayPause()
