@@ -1,4 +1,6 @@
 $(document).ready(function() {
+	var apiReady = false
+
 	var logIn = function() {
 		$.post('/sessions',
 			{session: {email: $('input[name="session[email]"]').val(), 
@@ -15,6 +17,10 @@ $(document).ready(function() {
 			$('.container').remove()
 			$('body').append(data)
 		})
+	}
+
+	if (apiReady == false) {
+		$('body').css("cursor", "wait")
 	}
 
 	$('.login').submit(function(e) {
@@ -46,20 +52,13 @@ $(document).ready(function() {
 		)
 	})
 
-	$('#user-link').on('click', function(e) {
+	$('.nav-link').on('click', function(e) {
 		e.preventDefault()
-		alert('hey')
 		var route = $(this).attr('href')
 		$.get(route, function(data) {
 			$('.container').remove()
-			$('body').append(data)
-		})
-	})
-
-	$('#user-index').on('click', function(e) {
-		e.preventDefault()
-		$.get('/users', function(data) {
-			$('.container').remove()
+			$('.playlist-container').remove()
+			$('.edit-container').remove()
 			$('body').append(data)
 		})
 	})
@@ -74,9 +73,7 @@ $(document).ready(function() {
 	})
 
 	if ($('#active').data('active') == true) {
-		console.log('hey')
 		var userID = $('#active').data('user').id
-		console.log(userID)
 		$.get('users/' + userID, function(data) {
 			$('.container').remove()
 			$('body').append(data)
@@ -87,4 +84,9 @@ $(document).ready(function() {
 			}
 		})
 	}
+
+	R.ready(function(){
+		apiReady = true
+		$('body').css("cursor", "auto")
+	})
 })
