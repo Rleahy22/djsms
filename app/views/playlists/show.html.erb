@@ -1,5 +1,5 @@
 <div class="playlist-container">
-	<h1><%= @playlist.title %></h1>
+	<h1 id="playlist-h1"><%= @playlist.title %></h1>
 	<%= content_tag :div, class: "playlist-data", data: {playlistrdioid: @playlist.rdio_id, playlistid: @playlist.id} do %>
 	<% end %>
 
