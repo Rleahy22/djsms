@@ -23,6 +23,8 @@ $(document).ready(function() {
 		$('body').css("cursor", "wait")
 	}
 
+	$('input[name="session[email]"]').focus()
+
 	$('.login').submit(function(e) {
 		e.preventDefault()
 		$('.alert').remove()
