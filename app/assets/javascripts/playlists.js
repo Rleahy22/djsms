@@ -64,8 +64,32 @@ $(document).ready(function() {
               	tracks: key
       },
       success: function(response) {
-                console.log(response)
-                R.player.queue.add(key)
+        $.post('/songs', 
+				{song: {query: $('input[name="song[query]"]').val(),
+								key: song.key,
+								name: song.name,
+								artist: song.artist,
+								icon: song.icon},
+				 playlist: $('.playlist-data').data('playlistid')},
+				function() {
+					if ((song.name + ' - ' + song.artist).length <= 40) {
+						$('#song-list').append('<li class="playlist-song ' + song.key + '"><img src="' + song.icon + '" class="song-icon"><h3 class="song-info">' + song.name + ' - ' + song.artist + '</h3></li>')
+					} else {
+						$('#song-list').append('<li class="playlist-song ' + song.key + '"><img src="' + song.icon + '" class="song-icon"><h3 class="song-info song-long">' + song.name + ' - ' + song.artist + '</h3></li>')
+					}
+					$('.search-results').toggle()
+				}
+				)
+				if (R.player.playingSource().attributes.key == $('.playlist-data').data('playlistrdioid')) {
+					var trackPosition = R.player.sourcePosition()
+					var timePosition = R.player.position()
+					if (R.player.playState() == 0) {
+						R.player.play({source: $('.playlist-data').data('playlistrdioid'), index: trackPosition, initialPosition: timePosition})
+						setTimeout(function(){R.player.pause()}, 2000)
+					} else {
+						R.player.play({source: $('.playlist-data').data('playlistrdioid'), index: trackPosition, initialPosition: timePosition})
+					}
+				}
       },
       error: function(response) {
               console.log("error " + response.message)
@@ -79,18 +103,6 @@ $(document).ready(function() {
 		$('#add-song').on('click', function() {
 			$('input[name="song[query]"]').val('')
 			addSongToRdio(song.key)
-			$.post('/songs', 
-				{song: {query: $('input[name="song[query]"]').val(),
-								key: song.key,
-								name: song.name,
-								artist: song.artist,
-								icon: song.icon},
-				 playlist: $('.playlist-data').data('playlistid')},
-				function() {
-						$('#song-list').append('<li class="playlist-song ' + song.key + '"><img src="' + song.icon + '" class="song-icon"><h3 class="song-info">' + song.name + ' - ' + song.artist + '</h3></li>')
-						$('.search-results').toggle()
-				}
-			)
 		})
 	}
 
