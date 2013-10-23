@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+
 	def new
 		if signed_in?
 			@user = current_user

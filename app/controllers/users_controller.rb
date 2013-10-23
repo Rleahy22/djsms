@@ -2,6 +2,10 @@ class UsersController < ApplicationController
 	before_filter :signed_in_user, only: [:edit, :update]
 	before_filter :correct_user, only: [:edit, :update]
 
+	@twilio_account_sid = ENV['TWILIO_ACCOUNT_SID']
+  @twilio_auth_token = ENV['TWILIO_AUTH_TOKEN']
+	  
+
 	def index
 		@users = User.paginate(page: params[:page])
 	end
@@ -37,6 +41,14 @@ class UsersController < ApplicationController
 		else
 			render 'edit'
 		end
+	end
+
+	def incoming
+		text = params[:Body]
+	  from = params[:From]
+	  puts "TEXT: #{text}, FROM #{from}"
+
+	  render nothing: true
 	end
 
 	private
