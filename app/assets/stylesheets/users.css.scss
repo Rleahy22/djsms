@@ -34,6 +34,19 @@ a:hover {
 	font-weight: bold;
 }
 
+.alert-error {
+	text-align: center;
+	color: red;
+	margin: auto;
+	position: fixed;
+	bottom: 10%;
+	left: 32%;
+	font-family: "Helvetica" Arial Sans-Serif;
+	font-size: 200%;
+	font-weight: bold;
+	width: 700px;
+}
+
 ul {
 	list-style: none
 }

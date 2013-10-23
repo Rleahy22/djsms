@@ -19,6 +19,7 @@ $(document).ready(function() {
 
 	$('.login').submit(function(e) {
 		e.preventDefault()
+		$('.alert').remove()
 		R.authenticate(function(auth) {
 			if (auth === true) {
 				logIn()
