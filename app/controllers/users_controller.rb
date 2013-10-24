@@ -43,14 +43,6 @@ class UsersController < ApplicationController
 		end
 	end
 
-	def incoming
-		text = params[:Body]
-	  from = params[:From]
-	  puts "TEXT: #{text}, FROM #{from}"
-
-	  render nothing: true
-	end
-
 	private
 
 		def correct_user
