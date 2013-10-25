@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe User do
 	before do
-		@user = User.new(username: "example1", email: "example@me.com",
-						 password: "password", password_confirmation: "password")
+		@user = User.create!(username: "example1", email: "example@me.com",
+						 password: "Password1", password_confirmation: "Password1")
 	end
 	
 	subject { @user }
@@ -32,10 +32,8 @@ describe User do
 			user_with_same_name = @user.dup
 			user_with_same_name.username = @user.username.upcase
 			user_with_same_name.email = "different@email.com"
-			user_with_same_name.save
+			user_with_same_name.should_not be_valid
 		end
-
-		it { should_not be_valid }
 	end
 
 	describe "when email is not present" do
@@ -58,10 +56,8 @@ describe User do
 			user_with_same_email = @user.dup
 			user_with_same_email.email = @user.email.upcase
 			user_with_same_email.username = "different_user"
-			user_with_same_email.save
+			user_with_same_email.should_not be_valid
 		end
-
-		it { should_not be_valid }
 	end
 
 	describe "when password is not present" do
@@ -89,27 +85,27 @@ describe User do
 		it { should_not be_valid}
 	end
 
-	# describe "playlist associations" do
+	describe "playlist associations" do
 
-	# 	before { @user.save }
-	# 	let!(:older_playlist) do
-	# 		FactoryGirl.create(:playlist, user: @user, created_at: 1.day.ago)
-	# 	end
-	# 	let!(:newer_playlist) do
-	# 		FactoryGirl.create(:playlist, user: @user, created_at: 1.hour.ago)
-	# 	end
+		before { @user.save }
+		let!(:older_playlist) do
+			FactoryGirl.create(:playlist, user: @user, created_at: 1.day.ago)
+		end
+		let!(:newer_playlist) do
+			FactoryGirl.create(:playlist, user: @user, created_at: 1.hour.ago)
+		end
 
-	# 	it "should have the playlists in the right order" do
-	# 		@user.playlists.should == [newer_playlist, older_playlist]
-	# 	end
+		it "should have the playlists in the right order" do
+			@user.playlists.should == [newer_playlist, older_playlist]
+		end
 
-	# 	it "should destroy associated playlists" do
-	# 		playlists - @user.playlists.dup
-	# 		@user.destroy
-	# 		playlists.should_not be_empty
-	# 		playlists.each do |playlist|
-	# 			Playlist.find_by_id(playlist.id).should be_nil
-	# 		end
-	# 	end
-	# end
+		it "should destroy associated playlists" do
+			playlists = @user.playlists.dup
+			@user.destroy
+			playlists.should_not be_empty
+			playlists.each do |playlist|
+				Playlist.find_by_id(playlist.id).should be_nil
+			end
+		end
+	end
 end
