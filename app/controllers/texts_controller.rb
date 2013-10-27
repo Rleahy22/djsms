@@ -20,7 +20,10 @@ class TextsController < ApplicationController
 	end
 
 	def destroy
-		@text = Text.find(params[:id])
-		@text.destroy
+		if Text.find(params[:id])
+			@text = Text.find(params[:id])
+			@text.destroy
+		end
+		render nothing: true
 	end
 end
