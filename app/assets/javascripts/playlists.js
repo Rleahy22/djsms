@@ -32,19 +32,6 @@ $(document).ready(function() {
 		)
 	}
 
-	var searchRdio = function(query) {
-		R.request({
-			method: "search",
-			content: {
-				query: query,
-				types: "track"
-			},
-			success: function(response) {
-				console.log(response.result.results[0])
-			}
-		})
-	}
-
 	var togglePlayPause = function() {
 		$('.play-visible').toggle()
 		$('.pause-visible').toggle()
@@ -57,44 +44,69 @@ $(document).ready(function() {
 		R.player.pause()
 	}
 
-	var addSongToRdio = function(key) {
-		R.request({
-      method: "addToPlaylist",
-      content: {playlist: $('.playlist-data').data('playlistrdioid'),
-              	tracks: key
-      },
-      success: function(response) {
-        $.post('/songs', 
-				{song: {query: $('input[name="song[query]"]').val(),
-								key: song.key,
-								name: song.name,
-								artist: song.artist,
-								icon: song.icon},
-				 playlist: $('.playlist-data').data('playlistid')},
-				function() {
-					if ((song.name + ' - ' + song.artist).length <= 40) {
-						$('#song-list').append('<li class="playlist-song ' + song.key + '"><img src="' + song.icon + '" class="song-icon"><h3 class="song-info">' + song.name + ' - ' + song.artist + '</h3></li>')
-					} else {
-						$('#song-list').append('<li class="playlist-song ' + song.key + '"><img src="' + song.icon + '" class="song-icon"><h3 class="song-info song-long">' + song.name + ' - ' + song.artist + '</h3></li>')
-					}
-					$('.search-results').toggle()
-				}
-				)
-				if (R.player.playingSource().attributes.key == $('.playlist-data').data('playlistrdioid')) {
-					var trackPosition = R.player.sourcePosition()
-					var timePosition = R.player.position()
-					if (R.player.playState() == 0) {
-						R.player.play({source: $('.playlist-data').data('playlistrdioid'), index: trackPosition, initialPosition: timePosition})
-						setTimeout(function(){R.player.pause()}, 2000)
-					} else {
-						R.player.play({source: $('.playlist-data').data('playlistrdioid'), index: trackPosition, initialPosition: timePosition})
-					}
-				}
-      },
-      error: function(response) {
-              console.log("error " + response.message)
-      }
+	var search = function(query, source) {
+		R.ready(function(){
+      R.request({
+        method: "search",
+        content: {
+                query: query,
+                types: "track"
+        },
+        success: function(response) {
+                song = response.result.results[0]
+                if (source == 'web') {
+                	addSongToDJSMS(song)
+                } else {
+                	addSongToRdio(song.key, query)
+                }
+        },
+        error: function(response) {
+                console.log("error " + response.message)
+        }
+      })
     })
+	}
+
+	var addSongToRdio = function(key, query) {
+		R.ready(function() {
+			R.request({
+	      method: "addToPlaylist",
+	      content: {playlist: $('.playlist-data').data('playlistrdioid'),
+	              	tracks: key
+	      },
+	      success: function(response) {
+	        $.post('/songs', 
+					{song: {query: query,
+									key: song.key,
+									name: song.name,
+									artist: song.artist,
+									icon: song.icon},
+					 playlist: $('.playlist-data').data('playlistid')},
+					function() {
+						if ((song.name + ' - ' + song.artist).length <= 40) {
+							$('#song-list').append('<li class="playlist-song ' + song.key + '"><img src="' + song.icon + '" class="song-icon"><h3 class="song-info">' + song.name + ' - ' + song.artist + '</h3></li>')
+						} else {
+							$('#song-list').append('<li class="playlist-song ' + song.key + '"><img src="' + song.icon + '" class="song-icon"><h3 class="song-info song-long">' + song.name + ' - ' + song.artist + '</h3></li>')
+						}
+						$('.search-results').toggle()
+					}
+					)
+					if (R.player.playingSource().attributes.key == $('.playlist-data').data('playlistrdioid')) {
+						var trackPosition = R.player.sourcePosition()
+						var timePosition = R.player.position()
+						if (R.player.playState() == 0) {
+							R.player.play({source: $('.playlist-data').data('playlistrdioid'), index: trackPosition, initialPosition: timePosition})
+							setTimeout(function(){R.player.pause()}, 2000)
+						} else {
+							R.player.play({source: $('.playlist-data').data('playlistrdioid'), index: trackPosition, initialPosition: timePosition})
+						}
+					}
+	      },
+	      error: function(response) {
+	              console.log("error " + response.message)
+	      }
+	    })
+		})
 	}
 
 	var addSongToDJSMS = function(song) {
@@ -102,7 +114,7 @@ $(document).ready(function() {
     $('.search-results').append('<img src="' + song.icon + '" class="song-icon"><button id="add-song">Add Song</button><h3 class="song-info">' + song.name + ' - ' + song.artist + '</h3>')
 		$('#add-song').on('click', function() {
 			$('input[name="song[query]"]').val('')
-			addSongToRdio(song.key)
+			addSongToRdio(song.key, $('input[name="song[query]"]').val())
 		})
 	}
 
@@ -124,6 +136,38 @@ $(document).ready(function() {
 		})
 	}
 
+	var retrieveTexts = function() {
+		$.get('playlist/' + $('.playlist-data').data('playlistid') + '/texts', function(data) {
+			console.log(data)
+			$.each(data, function(index, text) {
+				$.ajax({
+					url: '/texts/' + text.id,
+					type: 'DELETE',
+					success: function(result) {
+						console.log("Result: " + result)
+					}
+				})
+				textBody = text.content
+				index = textBody.indexOf(' ')
+				targetID = textBody.substring(0, index)
+				searchQuery = textBody.substring(index + 1)
+				search(searchQuery, 'text')
+			})
+		})
+	}
+
+	var watchForPlayStateChange = function() {
+		R.player.on("change:playState()", function() {
+			if (R.player.playState() == 0) {
+				$('.play-visible').show()
+				$('.pause-visible').hide()
+			} else {
+				$('.play-visible').hide()
+				$('.pause-visible').show()
+			}
+		})
+	}
+
 	$('.create-playlist').on('click', function(e) {
 		e.preventDefault()
 		newPlaylist($('input[name="playlist[title]"]').val())
@@ -138,6 +182,7 @@ $(document).ready(function() {
 			$('.pause-visible').toggle()
 			watchForSongChange()
 			watchForSourceChange()
+			watchForPlayStateChange()
 			ran = true
 		} else {
 			togglePlayPause()
@@ -177,22 +222,7 @@ $(document).ready(function() {
 			$('.search-results').toggle()
 		}
 		$('.search-results').html('')
-		R.ready(function(){
-      R.request({
-        method: "search",
-        content: {
-                query: $('input[name="song[query]"]').val(),
-                types: "track"
-        },
-        success: function(response) {
-                song = response.result.results[0]
-                addSongToDJSMS(song)
-        },
-        error: function(response) {
-                console.log("error " + response.message)
-        }
-      })
-    })
+		search($('input[name="song[query]"]').val(), 'web')
 	})
 
 	// $('#update').on('click', function(e) {
@@ -216,10 +246,13 @@ $(document).ready(function() {
 		}
 		watchForSongChange()
 		watchForSourceChange()
+		watchForPlayStateChange()
 		ran = true
 	})
 	
 	if ($('.player').length != 0) {
 		setTimeout(function() {$('#playing-marquee-left').show()}, 5000)
+		setInterval(retrieveTexts(), 10000)
 	}
+
 })
