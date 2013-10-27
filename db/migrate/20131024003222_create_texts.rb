@@ -3,6 +3,7 @@ class CreateTexts < ActiveRecord::Migration
     create_table :texts do |t|
       t.string :content
       t.string :sender
+      t.integer :playlist_id
 
       t.timestamps
     end

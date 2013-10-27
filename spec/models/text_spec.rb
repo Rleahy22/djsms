@@ -2,13 +2,20 @@ require 'spec_helper'
 
 describe Text do
 
-	before { @text = Text.create!(content: "123 Hey Jude -The Beatles",
-																sender: "+18158612021")}
+	let(:user) { FactoryGirl.create(:user) }
+	before do
+		@playlist = user.playlists.create!(title: "Top 100",
+																		 	 rdio_id: "p6780967")
+		@text = @playlist.texts.create!(content: "123 Hey Jude - The Beatles",
+																		sender: "+18158612021")
+	end
 
 	subject { @text }
 
 	it { should respond_to(:content) }
 	it { should respond_to(:sender) }
+	it { should respond_to(:playlist) }
+	its(:playlist) { should == @playlist}
 
 	it { should be_valid }
 
