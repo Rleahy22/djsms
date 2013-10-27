@@ -20,6 +20,7 @@ describe Playlist do
 	it { should respond_to(:user_id) }
 	it { should respond_to(:rdio_id) }
 	it { should respond_to(:user) }
+	it { should respond_to(:texts) }
 	its(:user) { should == user }
 
 	it { should be_valid }

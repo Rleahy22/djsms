@@ -36,6 +36,16 @@ class PlaylistsController < ApplicationController
 		end
 	end
 
+	def texts
+		if request.xhr?
+			playlist = Playlist.find(params[:id])
+			texts = playlist.texts.all
+			render json: texts
+		else
+			redirect_to '/'
+		end
+	end
+
 	private
 
 		def correct_user

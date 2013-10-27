@@ -10,4 +10,6 @@ Djsms::Application.routes.draw do
   post '/incoming', to: 'texts#create'
   match '/signin', to: 'sessions#new', 			via: 'get'
   match '/signout', to: 'sessions#destroy', via: 'delete'
+  get '/twilio', to: 'sessions#twilio'
+  get '/playlist/:id/texts', to: 'playlists#texts'
 end

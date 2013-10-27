@@ -2,6 +2,7 @@ class Playlist < ActiveRecord::Base
   attr_accessible :title, :rdio_id
 
   belongs_to :user
+  has_many :texts
   has_many :playlists_songs
   has_many :songs, through: :playlists_songs
 
