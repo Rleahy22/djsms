@@ -75,6 +75,18 @@ describe "UserPages" do
  			it { should have_content(p1.title) }
  			it { should have_content(p2.title) }
  		end
+
+ 		describe "as different user" do
+ 			let(:other_user) { FactoryGirl.create(:user, username: "otheruser",
+ 																						email: "other@me.com") }
+
+ 			before do
+ 				sign_in user
+ 				visit user_path(other_user)
+ 			end
+
+ 			it {should_not have_selector("input[type=submit][value='Create Playlist']")}
+ 		end
  	end
 
  	describe "edit" do

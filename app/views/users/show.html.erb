@@ -1,6 +1,8 @@
 <div class="container">
 	<h1><%= @user.username %></h1>
-	<%= render 'shared/playlist_form' if @playlist %>
+	<% if @user == @current_user %>
+		<%= render 'shared/playlist_form' if @playlist %>
+	<% end %>
 
 	<div class="playlists">
 		<% if @user.playlists.any? %>

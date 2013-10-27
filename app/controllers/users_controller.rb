@@ -16,6 +16,7 @@ class UsersController < ApplicationController
 
 	def show
 		@user = User.find(params[:id])
+		@current_user = current_user
 		@playlists = @user.playlists.paginate(page: params[:page])
 		@playlist = current_user.playlists.build if signed_in?
 	end
