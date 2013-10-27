@@ -74,6 +74,15 @@ $(document).ready(function() {
 		})
 	})
 
+	$('.profile-link').on('click', function(e) {
+		e.preventDefault()
+		var route = $(this).attr('href')
+		$.get(route, function(data) {
+			$('.container').remove()
+			$('body').append(data)
+		})
+	})
+
 	if ($('#active').data('active') == true) {
 		var userID = $('#active').data('user').id
 		$.get('users/' + userID, function(data) {
