@@ -33,9 +33,9 @@ $(document).ready(function() {
 	}
 
 	var togglePlayPause = function() {
+		R.player.togglePause()
 		$('.play-visible').toggle()
 		$('.pause-visible').toggle()
-		R.player.togglePause()
 	}
 
 	var stopPlayer = function() {
@@ -137,23 +137,27 @@ $(document).ready(function() {
 	}
 
 	var retrieveTexts = function() {
-		$.get('playlist/' + $('.playlist-data').data('playlistid') + '/texts', function(data) {
-			console.log(data)
-			$.each(data, function(index, text) {
-				$.ajax({
-					url: '/texts/' + text.id,
-					type: 'DELETE',
-					success: function(result) {
-						console.log("Result: " + result)
-					}
+		console.log('what')
+		setTimeout(retrieveTexts, 10000)
+		if ($('.playlist-data').data('playlistid') != null ) {
+			$.get('playlist/' + $('.playlist-data').data('playlistid') + '/texts', function(data) {
+				console.log(data)
+				$.each(data, function(index, text) {
+					$.ajax({
+						url: '/texts/' + text.id,
+						type: 'DELETE',
+						success: function(result) {
+							console.log("Result: " + result)
+						}
+					})
+					textBody = text.content
+					index = textBody.indexOf(' ')
+					targetID = textBody.substring(0, index)
+					searchQuery = textBody.substring(index + 1)
+					search(searchQuery, 'text')
 				})
-				textBody = text.content
-				index = textBody.indexOf(' ')
-				targetID = textBody.substring(0, index)
-				searchQuery = textBody.substring(index + 1)
-				search(searchQuery, 'text')
 			})
-		})
+		}
 	}
 
 	var watchForPlayStateChange = function() {
@@ -168,14 +172,7 @@ $(document).ready(function() {
 		})
 	}
 
-	$('.create-playlist').on('click', function(e) {
-		e.preventDefault()
-		newPlaylist($('input[name="playlist[title]"]').val())
-	})
-
-	$('.pause-visible').toggle()
-
-	$('.play-visible').on('click', function() {
+	var play = function() {
 		if (ran == false) {
 			R.player.play({source: $('.playlist-data').data('playlistrdioid')})
 			$('.play-visible').toggle()
@@ -187,6 +184,17 @@ $(document).ready(function() {
 		} else {
 			togglePlayPause()
 		}
+	}
+
+	$('.create-playlist').on('click', function(e) {
+		e.preventDefault()
+		newPlaylist($('input[name="playlist[title]"]').val())
+	})
+
+	$('.pause-visible').toggle()
+
+	$('.play-visible').on('click', function() {
+		play()
 	})
 
 	$('.pause-visible').on('click', function() {
@@ -252,7 +260,7 @@ $(document).ready(function() {
 	
 	if ($('.player').length != 0) {
 		setTimeout(function() {$('#playing-marquee-left').show()}, 5000)
-		setInterval(retrieveTexts(), 10000)
+		setTimeout(retrieveTexts, 10000)
 	}
 
 })
