@@ -18,4 +18,9 @@ class SongsController < ApplicationController
 	def show
 		@song = Song.find(params[:id])
 	end
+
+	def destroy
+		Song.find(params[:id]).destroy
+		render nothing: true
+	end
 end

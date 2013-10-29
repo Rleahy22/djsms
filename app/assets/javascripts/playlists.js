@@ -263,4 +263,19 @@ $(document).ready(function() {
 		setTimeout(retrieveTexts, 10000)
 	}
 
+
+	$('.player').on("contextmenu", ".playlist-song", function(e) {
+		var clickedSong = $(this)
+		if (confirm("delete " + $(this).context.innerText + " from playlist?")) {
+			var songID = $(this).data('songid')
+			$.ajax({
+				url: '/songs/' + songID,
+				type: 'DELETE',
+				success: function(result) {
+					clickedSong.remove()
+				}
+			})
+			return false
+		}
+	})
 })
