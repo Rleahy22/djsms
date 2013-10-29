@@ -89,7 +89,7 @@ $(document).ready(function() {
 						} else {
 							$('#song-list').append('<li class="playlist-song ' + song.key + '" data-songid="' + songID + '" data-songkey="' + song.key + '"><img src="' + song.icon + '" class="song-icon"><h3 class="song-info song-long">' + song.name + ' - ' + song.artist + '</h3></li>')
 						}
-						$('.search-results').toggle()
+						$('.search-results').hide()
 					}
 					)
 					if (R.player.playingSource().attributes.key == $('.playlist-data').data('playlistrdioid')) {
@@ -161,18 +161,6 @@ $(document).ready(function() {
 		}
 	}
 
-	var watchForPlayStateChange = function() {
-		R.player.on("change:playState()", function() {
-			if (R.player.playState() == 0) {
-				$('.play-visible').show()
-				$('.pause-visible').hide()
-			} else {
-				$('.play-visible').hide()
-				$('.pause-visible').show()
-			}
-		})
-	}
-
 	var play = function() {
 		if (ran == false) {
 			R.player.play({source: $('.playlist-data').data('playlistrdioid')})
@@ -180,7 +168,6 @@ $(document).ready(function() {
 			$('.pause-visible').toggle()
 			watchForSongChange()
 			watchForSourceChange()
-			watchForPlayStateChange()
 			ran = true
 		} else {
 			togglePlayPause()
@@ -255,7 +242,6 @@ $(document).ready(function() {
 		}
 		watchForSongChange()
 		watchForSourceChange()
-		watchForPlayStateChange()
 		ran = true
 	})
 	
