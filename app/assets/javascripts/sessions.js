@@ -98,6 +98,9 @@ $(document).ready(function() {
 
 	R.ready(function(){
 		apiReady = true
+		if ($('.playlist').length == 0) {
+			R.player.pause()
+		}
 		$('body').css("cursor", "auto")
 	})
 })
