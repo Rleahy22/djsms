@@ -20,7 +20,7 @@ $(document).ready(function() {
 	}
 
 	if (apiReady == false) {
-		$('body').css("cursor", "wait")
+
 	}
 
 	$('input[name="session[email]"]').focus()
@@ -101,6 +101,6 @@ $(document).ready(function() {
 		if ($('.playlist').length == 0) {
 			R.player.pause()
 		}
-		$('body').css("cursor", "auto")
+		$('.loading-dj').remove()
 	})
 })
