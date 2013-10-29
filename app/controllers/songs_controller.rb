@@ -4,14 +4,16 @@ class SongsController < ApplicationController
 	end
 
 	def create
-		@song = Song.new(params[:song])
-		@playlist = Playlist.find(params[:playlist])
-		if @song.save
-			@playlist.songs << @song
-			flash[:succes] = "Song Added"
-			redirect_to song_path(@song)
-		else
-			redirect_to current_user
+		if request.xhr?
+			@song = Song.new(params[:song])
+			@playlist = Playlist.find(params[:playlist])
+			if @song.save
+				@playlist.songs << @song
+				flash[:succes] = "Song Added"
+				render json: @song
+			else
+				redirect_to current_user
+			end
 		end
 	end
 

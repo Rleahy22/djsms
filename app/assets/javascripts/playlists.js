@@ -82,11 +82,12 @@ $(document).ready(function() {
 									artist: song.artist,
 									icon: song.icon},
 					 playlist: $('.playlist-data').data('playlistid')},
-					function() {
+					function(data) {
+						var songID = data.id
 						if ((song.name + ' - ' + song.artist).length <= 40) {
-							$('#song-list').append('<li class="playlist-song ' + song.key + '"><img src="' + song.icon + '" class="song-icon"><h3 class="song-info">' + song.name + ' - ' + song.artist + '</h3></li>')
+							$('#song-list').append('<li class="playlist-song ' + song.key + '" data-songid="' + songID + '" data-songkey="' + song.key + '"><img src="' + song.icon + '" class="song-icon"><h3 class="song-info">' + song.name + ' - ' + song.artist + '</h3></li>')
 						} else {
-							$('#song-list').append('<li class="playlist-song ' + song.key + '"><img src="' + song.icon + '" class="song-icon"><h3 class="song-info song-long">' + song.name + ' - ' + song.artist + '</h3></li>')
+							$('#song-list').append('<li class="playlist-song ' + song.key + '" data-songid="' + songID + '" data-songkey="' + song.key + '"><img src="' + song.icon + '" class="song-icon"><h3 class="song-info song-long">' + song.name + ' - ' + song.artist + '</h3></li>')
 						}
 						$('.search-results').toggle()
 					}
@@ -266,12 +267,27 @@ $(document).ready(function() {
 
 	$('.player').on("contextmenu", ".playlist-song", function(e) {
 		var clickedSong = $(this)
-		if (confirm("delete " + $(this).context.innerText + " from playlist?")) {
-			var songID = $(this).data('songid')
+		if (confirm("delete " + clickedSong.context.innerText + " from playlist?")) {
+			var songID = clickedSong.data('songid')
 			$.ajax({
 				url: '/songs/' + songID,
 				type: 'DELETE',
 				success: function(result) {
+					R.request({
+						method: "removeFromPlaylist",
+						content: {
+			                playlist: $('.playlist-data').data('playlistrdioid'),
+			                index: clickedSong.index(),
+			                count: 1,
+			                tracks: clickedSong.data('songkey')
+		        },
+		        success: function(response) {
+		        	console.log(response)
+		        },
+		        error: function(response) {
+			        console.log("error " + response.message)
+			      }
+					})
 					clickedSong.remove()
 				}
 			})
