@@ -2,8 +2,15 @@ require 'spec_helper'
 
 describe User do
 	before do
-		@user = User.create!(username: "example1", email: "example@me.com",
-						 password: "Password1", password_confirmation: "Password1")
+		@user = User.create!(username: "example1",
+												 email: "example@me.com",
+						 						 password: "Password1",
+						 						 password_confirmation: "Password1")
+		@other_user = User.create!(username: "example2",
+															 email: "example2@me.com",
+						 									 password: "Password1",
+						 									 password_confirmation: "Password1")
+		@friend = Friendship.create(user_id: @user.id, friend_id: @other_user.id)
 	end
 	
 	subject { @user }
@@ -16,6 +23,14 @@ describe User do
 	it { should respond_to(:remember_token) }
 	it { should respond_to(:authenticate) }
 	it { should respond_to(:playlists) }
+	it { should respond_to(:friends) }
+	it { should respond_to(:friendships) }
+
+	it { should be_valid }
+
+	it "should have created a relationship with friends" do
+		@user.friends.first.should == @other_user
+	end
 
 	describe "when username is not present" do
 		before { @user.username = "" }
