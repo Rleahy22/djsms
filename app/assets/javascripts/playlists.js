@@ -221,6 +221,28 @@ $(document).ready(function() {
 		search($('input[name="song[query]"]').val(), 'web')
 	})
 
+	$('#add-button').on('click', function(e) {
+		e.preventDefault()
+		console.log('hey')
+		$('.add-friends').show()
+	})
+
+	$('#close').on('click', function(e) {
+		e.preventDefault()
+		$('.add-friends').hide()
+	})
+
+	$('#friend-submit').on('click', function(e) {
+		e.preventDefault()
+		$.post('/contributors',
+			{contributor: {name: $('input[name="contributor[name]"]').val(),
+										 phone_number: $('input[name="contributor[phone_number]"]').val()},
+			user_id: $('.playlist-data').data('userid')},
+			function(data) {
+				console.log(data)
+			}
+		)
+	})
 	// $('#update').on('click', function(e) {
 	// 	e.preventDefault()
 	// 	var route = $(this).parent()[0].action.replace("http://localhost:3000", "")

@@ -1,9 +1,10 @@
 <div class="playlist-container">
 	<h1 id="playlist-h1"><%= @playlist.title %></h1>
-	<%= content_tag :div, class: "playlist-data", data: {playlistrdioid: @playlist.rdio_id, playlistid: @playlist.id} do %>
+	<%= content_tag :div, class: "playlist-data", data: {playlistrdioid: @playlist.rdio_id, playlistid: @playlist.id, userid: @playlist.user_id} do %>
 	<% end %>
 
 	<div class="search">
+		<%= link_to "Add Friends to Playlist", @user, id: "add-button" %>
 		<%= form_for @song do |f| %>
 			<%= f.text_field :query, placeholder: "(Song Name - Artist)" %>
 			<%= f.hidden_field :key %>
@@ -41,5 +42,16 @@
 	<% if @correct_user %>
 		<%= link_to "Delete Playlist", @playlist, method: "delete", data: { confirm: "Are you sure you want to delete playlist, #{@playlist.title}?" }, class: "playlist-link", id: "delete-playlist" %>
 		<%= link_to "Edit Playlist", edit_playlist_path(@playlist), class: "playlist-link", id: "edit-playlist" %>
+	<% end %>
+</div>
+
+<div class="add-friends">
+	<%= link_to "x", @user, id: "close" %>
+	<%= form_for @contributor do |f| %>
+		<%= f.label :name, "Name" %>
+		<%= f.text_field :name %>
+		<%= f.label :phone_number, "Phone Number" %>
+		<%= f.text_field :phone_number, placeholder: "555-867-5309" %>
+		<%= f.submit "Add to Playlist", id: "friend-submit" %>
 	<% end %>
 </div>

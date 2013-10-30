@@ -7,6 +7,7 @@ class PlaylistsController < ApplicationController
 		@current_user = current_user
 		@correct_user = correct_user?
 		@song = Song.new
+		@contributor = Contributor.new
 	end
 
 	def create

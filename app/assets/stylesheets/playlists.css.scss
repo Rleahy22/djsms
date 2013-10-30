@@ -7,6 +7,10 @@
 	margin: auto;
 }
 
+#add-button {
+	margin-left: 10px
+}
+
 .new_song {
 	margin-bottom: 40px;
 }
@@ -231,4 +235,37 @@
 	color: white;
 	font-size: 200%;
 	padding-top: 10px;
+}
+
+.add-friends {
+	background-color: silver;
+	border: 3px solid white;
+	width: 910px;
+	height: 820px;
+	position: fixed;
+	top: 8%;
+	right: 50%;
+	margin-right: -458px;
+	display: none;
+	opacity: .98;
+}
+
+.new_contributor input {
+	width: 250px;
+	text-align: center;
+	margin: 20px 20px 10px 20px;
+}
+
+.new_contributor label {
+	color: black;
+	font-size: 20px;
+	text-shadow: none;
+}
+
+#close {
+	color: black;
+	float: right;
+	border: 1px solid black;
+	margin: 7px;
+	padding: 0 5px 2px 5px;
 }
