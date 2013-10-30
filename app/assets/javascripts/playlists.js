@@ -237,7 +237,8 @@ $(document).ready(function() {
 		$.post('/contributors',
 			{contributor: {name: $('input[name="contributor[name]"]').val(),
 										 phone_number: $('input[name="contributor[phone_number]"]').val()},
-			user_id: $('.playlist-data').data('userid')},
+			user_id: $('.playlist-data').data('userid'),
+			playlist_id: $('.playlist-data').data('playlistid')},
 			function(data) {
 				console.log(data)
 			}
