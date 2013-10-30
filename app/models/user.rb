@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   has_many :playlists, dependent: :destroy
   has_many :friendships, foreign_key: "user_id", class_name: "Friendship"
   has_many :friends, through: :friendships
+  has_many :contributors, dependent: :destroy
 
   before_save { |user| self.email = email.downcase} 
   before_create :create_remember_token

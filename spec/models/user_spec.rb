@@ -25,6 +25,7 @@ describe User do
 	it { should respond_to(:playlists) }
 	it { should respond_to(:friends) }
 	it { should respond_to(:friendships) }
+	it { should respond_to(:contributors) }
 
 	it { should be_valid }
 
