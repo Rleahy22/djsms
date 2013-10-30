@@ -5,6 +5,8 @@ class Playlist < ActiveRecord::Base
   has_many :texts
   has_many :playlists_songs
   has_many :songs, through: :playlists_songs
+  has_many :playlists_contributors
+  has_many :contributors, through: :playlists_contributors
 
   validates :user_id, presence: true
   validates :title, 	presence: true, length: { maximum: 50 } 

@@ -12,6 +12,9 @@ describe Playlist do
 										 artist: "Kanye West",
 										 icon: "http://http://rdio-c.cdn3.rdio.com/album/5/c/4/00000000002fa4c5/2/square-200.jpg")
 		@playlist.songs << @song
+		@contributor = user.contributors.create(name: "Ryan",
+																						phone_number: "+15558675309")
+		@playlist.contributors << @contributor
 	end
 
 	subject { @playlist }
@@ -25,13 +28,22 @@ describe Playlist do
 
 	it { should be_valid }
 
-	it "should have created a relationship" do
+	it "should have created a relationship with songs" do
 		PlaylistsSong.first.playlist.should == @playlist
 		PlaylistsSong.first.song.should == @song
 	end
 
 	it "should have songs" do
 		@playlist.songs.should == [@song]
+	end
+
+	it "should have created a relationship with contributors" do
+		PlaylistsContributor.first.playlist.should == @playlist
+		PlaylistsContributor.first.contributor.should == @contributor
+	end
+
+	it "should have contributors" do
+		@playlist.contributors.should == [@contributor]
 	end
 
 	describe "when user_id is not present" do
