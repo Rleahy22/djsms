@@ -269,3 +269,29 @@
 	margin: 7px;
 	padding: 0 5px 2px 5px;
 }
+
+.add-friends h2 {
+	margin-top: 10px;
+	color: black;
+	text-shadow: none;
+}
+
+#contrib-list {
+	margin-top: 10px;
+	padding: 0;
+}
+
+#contrib-list li {
+	margin: auto;
+	width: 600px;
+}
+
+.contrib-name {
+	margin: 0;
+	float: left;
+}
+
+.contrib-phone {
+	margin: 0;
+	float: right;
+}

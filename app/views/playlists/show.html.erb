@@ -54,4 +54,10 @@
 		<%= f.text_field :phone_number, placeholder: "555-867-5309" %>
 		<%= f.submit "Add to Playlist", id: "friend-submit" %>
 	<% end %>
+	<h2>Contributors</h2>
+	<ul id="contrib-list">
+		<% @playlist.contributors.each do |contributor| %>
+			<li><h3 class="contrib-name"><%= contributor.name.capitalize %></h3><h3 class="contrib-phone"><%= contributor.phone_number %></h3></li>
+		<% end %>
+	</ul>
 </div>
