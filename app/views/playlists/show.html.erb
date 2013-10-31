@@ -57,7 +57,7 @@
 	<h2>Contributors</h2>
 	<ul id="contrib-list">
 		<% @playlist.contributors.each do |contributor| %>
-			<li><h3 class="contrib-name"><%= contributor.name.capitalize %></h3><h3 class="contrib-phone"><%= contributor.phone_number %></h3></li>
+			<li><h3 class="contrib-name"><%= contributor.name.capitalize %></h3><h3 class="contrib-phone"><%= contributor.phone_number.gsub("+1", '').gsub(/(\d{3})(\d{3})(\d{4})/, '(\1) \2-\3') %></h3></li>
 		<% end %>
 	</ul>
 </div>

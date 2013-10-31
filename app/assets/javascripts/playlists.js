@@ -240,7 +240,9 @@ $(document).ready(function() {
 			user_id: $('.playlist-data').data('userid'),
 			playlist_id: $('.playlist-data').data('playlistid')},
 			function(data) {
-				console.log(data)
+				var phoneNumber = data.phone_number.replace(/\+1/, "")
+				phoneNumber = phoneNumber.replace(/(\d{3})(\d{3})(\d{4})/, "($1) $2-$3")
+				$('#contrib-list').append('<li><h3 class="contrib-name">' + data.name + '</h3><h3 class="contrib-phone">' + phoneNumber + '</h3></li>')
 			}
 		)
 	})
