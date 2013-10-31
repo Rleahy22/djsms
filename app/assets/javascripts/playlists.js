@@ -2,6 +2,7 @@ $(document).ready(function() {
 	var activePlaylist = {}
 	var ran = false
 	var song = {}
+	var changed = false
 
 	var newPlaylist = function(name) {
 		R.request({
@@ -76,13 +77,13 @@ $(document).ready(function() {
 	      },
 	      success: function(response) {
 	        $.post('/songs', 
-					{song: {query: query,
+						{song: {query: query,
 									key: song.key,
 									name: song.name,
 									artist: song.artist,
 									icon: song.icon},
-					 playlist: $('.playlist-data').data('playlistid')},
-					function(data) {
+					  playlist: $('.playlist-data').data('playlistid')},
+						function(data) {
 						var songID = data.id
 						if ((song.name + ' - ' + song.artist).length <= 40) {
 							$('#song-list').append('<li class="playlist-song ' + song.key + '" data-songid="' + songID + '" data-songkey="' + song.key + '"><img src="' + song.icon + '" class="song-icon"><h3 class="song-info">' + song.name + ' - ' + song.artist + '</h3></li>')
@@ -90,18 +91,9 @@ $(document).ready(function() {
 							$('#song-list').append('<li class="playlist-song ' + song.key + '" data-songid="' + songID + '" data-songkey="' + song.key + '"><img src="' + song.icon + '" class="song-icon"><h3 class="song-info song-long">' + song.name + ' - ' + song.artist + '</h3></li>')
 						}
 						$('.search-results').hide()
-					}
-					)
-					if (R.player.playingSource().attributes.key == $('.playlist-data').data('playlistrdioid')) {
-						var trackPosition = R.player.sourcePosition()
-						var timePosition = R.player.position()
-						if (R.player.playState() == 0) {
-							R.player.play({source: $('.playlist-data').data('playlistrdioid'), index: trackPosition, initialPosition: timePosition})
-							setTimeout(function(){R.player.pause()}, 2000)
-						} else {
-							R.player.play({source: $('.playlist-data').data('playlistrdioid'), index: trackPosition, initialPosition: timePosition})
 						}
-					}
+					)
+					changed = true
 	      },
 	      error: function(response) {
 	              console.log("error " + response.message)
@@ -122,6 +114,11 @@ $(document).ready(function() {
 	var watchForSongChange = function() {
 		R.player.on("change:playingTrack", function(newSong) {
 		  var currentKey = newSong.attributes.key
+		  if (changed == true) {
+		  	var trackPosition = R.player.sourcePosition()
+		  	R.player.play({source: $('.playlist-data').data('playlistrdioid'), index: trackPosition})
+		  	changed = false
+		  }
 		  $('.playing').removeClass("playing")
 		  $('.' + currentKey).addClass("playing")
 		  $('#playing-marquee-left').html(newSong.attributes.name + ' - ' + newSong.attributes.artist)
@@ -293,13 +290,12 @@ $(document).ready(function() {
 			                tracks: clickedSong.data('songkey')
 		        },
 		        success: function(response) {
-		        	console.log(response)
 		        },
 		        error: function(response) {
-			        console.log("error " + response.message)
 			      }
 					})
 					clickedSong.remove()
+					changed = true
 				}
 			})
 			return false
