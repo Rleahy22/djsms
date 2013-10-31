@@ -3,4 +3,8 @@ class Contributor < ActiveRecord::Base
   belongs_to :user
   has_many :playlists_contributors
   has_many :playlists, through: :playlists_contributors
+
+  validates :name, presence: true
+  validates :phone_number, presence: true,
+  					format: { with: /^[+][0-9]{11}$/ }
 end

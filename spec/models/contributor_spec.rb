@@ -34,4 +34,15 @@ describe Contributor do
 		@contributor.playlists.should == [@playlist]
 	end
 
+	describe "when name is not present" do
+		before { @contributor.name = '' }
+
+		it { should_not be_valid }
+	end
+
+	describe "when phone number format is invalid" do
+		before { @contributor.phone_number = "555-867-5309" }
+
+		it { should_not be_valid }
+	end
 end
