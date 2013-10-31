@@ -1,7 +1,5 @@
 class ContributorsController < ApplicationController
 
-	@client = Twilio::REST::Client.new ENV['TWILIO_ACCOUNT_SID'], ENV['TWILIO_AUTH_TOKEN']
-
 	def create
 		if request.xhr?
 			user = User.find(params[:user_id])
@@ -14,10 +12,11 @@ class ContributorsController < ApplicationController
 			playlist = Playlist.find(params[:playlist_id])
 			if !(playlist.contributors.include?(contributor))
 				playlist.contributors << contributor
-				@client.account.sms.messages.create(
+				client = generate_twilio
+				client.account.sms.messages.create(
 					from: ENV['TWILIO_NUMBER'],
 					to: contributor.phone_number,
-					body: "You have been invited to the playlist: #{playlist.title}.  To add a song to the playlist, response to this number with the song you want in the format \"#{playlist.id} (song name) - (song artist)\"")
+					body: "You've been added to the playlist #{playlist.title}. Text this number in the format:\n\"#{playlist.id} (song name) - (song artist)\" to add a song")
 			end
 			render json: contributor
 		end

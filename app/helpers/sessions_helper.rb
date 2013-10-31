@@ -40,4 +40,10 @@ module SessionsHelper
 	def store_location
 		session[:return_to] = request.url
 	end
+
+	def generate_twilio
+		puts "SID = #{ENV['TWILIO_ACCOUNT_SID']}"
+		puts "TOKEN = #{ENV['TWILIO_AUTH_TOKEN']}"
+		Twilio::REST::Client.new ENV['TWILIO_ACCOUNT_SID'], ENV['TWILIO_AUTH_TOKEN']
+	end
 end
