@@ -124,6 +124,7 @@ $(document).ready(function() {
 		  var currentKey = newSong.attributes.key
 		  $('.playing').removeClass("playing")
 		  $('.' + currentKey).addClass("playing")
+		  $('#song-list').scrollTop($('.' + currentKey).position().top)
 		  $('#playing-marquee-left').html(newSong.attributes.name + ' - ' + newSong.attributes.artist)
 		  $('#playing-marquee-right').html(newSong.attributes.name + ' - ' + newSong.attributes.artist)
 		});
