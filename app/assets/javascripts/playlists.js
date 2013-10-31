@@ -121,6 +121,8 @@ $(document).ready(function() {
 		  }
 		  $('.playing').removeClass("playing")
 		  $('.' + currentKey).addClass("playing")
+		  var index = $('.playing').index()
+		  $('#song-list').scrollTop(index * 59)
 		  $('#playing-marquee-left').html(newSong.attributes.name + ' - ' + newSong.attributes.artist)
 		  $('#playing-marquee-right').html(newSong.attributes.name + ' - ' + newSong.attributes.artist)
 		});
