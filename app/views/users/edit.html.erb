@@ -1,23 +1,23 @@
 <div class="edit-container">
-	<h2>Update Your Profile</h2>
+  <h2>Update Your Profile</h2>
 
-	<%= form_for @user do |f| %>
-		<%= render 'shared/error_messages', object: f.object %>
+  <%= form_for @user do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
 
-		<%= f.label :username, class: "signup-label" %>
-		<%= f.text_field :username %>
+    <%= f.label :username, class: "signup-label" %>
+    <%= f.text_field :username %>
 
-		<%= f.label :email, class: "signup-label" %>
-		<%= f.text_field :email %>
+    <%= f.label :email, class: "signup-label" %>
+    <%= f.text_field :email %>
 
-		<%= f.label :password, class: "signup-label" %>
-		<%= f.text_field :password %>
+    <%= f.label :password, class: "signup-label" %>
+    <%= f.text_field :password %>
 
-		<%= f.label :password_confirmation, "Password Confirmation", class: "signup-label" %>
-		<%= f.text_field :password_confirmation %>
+    <%= f.label :password_confirmation, "Password Confirmation", class: "signup-label" %>
+    <%= f.text_field :password_confirmation %>
 
-		<%= f.submit "Save Changes", class: "signup-edit" %>
+    <%= f.submit "Save Changes", class: "signup-edit" %>
 
-	<% end %>
-	<%= link_to "Delete Account", @user, method: "delete", data: { confirm: "Are you sure you want to delete your account?" }, class: "nav-link" %>
+  <% end %>
+  <%= link_to "Delete Account", @user, method: "delete", data: { confirm: "Are you sure you want to delete your account?" }, class: "nav-link" %>
 </div>

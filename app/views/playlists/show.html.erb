@@ -1,63 +1,63 @@
 <div class="playlist-container">
-	<h1 id="playlist-h1"><%= @playlist.title %></h1>
-	<%= content_tag :div, class: "playlist-data", data: {playlistrdioid: @playlist.rdio_id, playlistid: @playlist.id, userid: @playlist.user_id} do %>
-	<% end %>
+  <h1 id="playlist-h1"><%= @playlist.title %></h1>
+  <%= content_tag :div, class: "playlist-data", data: {playlistrdioid: @playlist.rdio_id, playlistid: @playlist.id, userid: @playlist.user_id} do %>
+  <% end %>
 
-	<div class="search">
-		<%= link_to "Add Friends to Playlist", @user, id: "add-button" %>
-		<%= form_for @song do |f| %>
-			<%= f.text_field :query, placeholder: "(Song Name - Artist)" %>
-			<%= f.hidden_field :key %>
-			<%= f.hidden_field :name %>
-			<%= f.hidden_field :artist %>
-			<%= f.hidden_field :icon %>
-			<%= f.submit "Search", id: "submit-search" %>
-		<% end %>
+  <div class="search">
+    <%= link_to "Add Friends to Playlist", @user, id: "add-button" %>
+    <%= form_for @song do |f| %>
+      <%= f.text_field :query, placeholder: "(Song Name - Artist)" %>
+      <%= f.hidden_field :key %>
+      <%= f.hidden_field :name %>
+      <%= f.hidden_field :artist %>
+      <%= f.hidden_field :icon %>
+      <%= f.submit "Search", id: "submit-search" %>
+    <% end %>
 
-		<%= content_tag :div, class: "search-results" do %>
-		<% end %>
-	</div>
+    <%= content_tag :div, class: "search-results" do %>
+    <% end %>
+  </div>
 
-	<div class="player">
-		<ul id="song-list">
-		<% @playlist.songs.each do |song| %>
-			<% if "#{song.name} - #{song.artist}".length <= 40 %>
-					<li class="playlist-song <%= song.key %>" data-songid="<%= song.id %>" data-songkey="<%= song.key %>"><img src="<%= song.icon %>" class="song-icon"><h3 class="song-info"><%= song.name %> - <%= song.artist %></h3></li>
-			<% else %>
-				<li class="playlist-song <%= song.key %>" data-songid="<%= song.id %>" data-songkey="<%= song.key %>"><img src="<%= song.icon %>" class="song-icon"><h3 class="song-info song-long"><%= song.name %> - <%= song.artist %></h3></li>
-			<% end %>
-		<% end %>
-		</ul>
-		<div class="controls">
-			<marquee id="playing-marquee-left"></marquee>
-			<marquee id="playing-marquee-right"></marquee>
-			<div class="buttons">
-				<%= image_tag("previous.png", class: "player-buttons previous") %>
-				<%= image_tag("play.png", class: "player-buttons play-visible") %>
-				<%= image_tag("pause.png", class: "player-buttons pause-visible") %>
-				<%= image_tag("next.png", class: "player-buttons next") %>
-			</div>
-		</div>
-	</div>
-	<% if @correct_user %>
-		<%= link_to "Delete Playlist", @playlist, class: "playlist-link", id: "delete-playlist" %>
-		<%= link_to "Edit Playlist", edit_playlist_path(@playlist), class: "playlist-link", id: "edit-playlist" %>
-	<% end %>
+  <div class="player">
+    <ul id="song-list">
+    <% @playlist.songs.each do |song| %>
+      <% if "#{song.name} - #{song.artist}".length <= 40 %>
+          <li class="playlist-song <%= song.key %>" data-songid="<%= song.id %>" data-songkey="<%= song.key %>"><img src="<%= song.icon %>" class="song-icon"><h3 class="song-info"><%= song.name %> - <%= song.artist %></h3></li>
+      <% else %>
+        <li class="playlist-song <%= song.key %>" data-songid="<%= song.id %>" data-songkey="<%= song.key %>"><img src="<%= song.icon %>" class="song-icon"><h3 class="song-info song-long"><%= song.name %> - <%= song.artist %></h3></li>
+      <% end %>
+    <% end %>
+    </ul>
+    <div class="controls">
+      <marquee id="playing-marquee-left"></marquee>
+      <marquee id="playing-marquee-right"></marquee>
+      <div class="buttons">
+        <%= image_tag("previous.png", class: "player-buttons previous") %>
+        <%= image_tag("play.png", class: "player-buttons play-visible") %>
+        <%= image_tag("pause.png", class: "player-buttons pause-visible") %>
+        <%= image_tag("next.png", class: "player-buttons next") %>
+      </div>
+    </div>
+  </div>
+  <% if @correct_user %>
+    <%= link_to "Delete Playlist", @playlist, class: "playlist-link", id: "delete-playlist" %>
+    <%= link_to "Edit Playlist", edit_playlist_path(@playlist), class: "playlist-link", id: "edit-playlist" %>
+  <% end %>
 </div>
 
 <div class="add-friends">
-	<%= link_to "x", @user, id: "close" %>
-	<%= form_for @contributor do |f| %>
-		<%= f.label :name, "Name" %>
-		<%= f.text_field :name %>
-		<%= f.label :phone_number, "Phone Number" %>
-		<%= f.text_field :phone_number, placeholder: "555-867-5309" %>
-		<%= f.submit "Add to Playlist", id: "friend-submit" %>
-	<% end %>
-	<h2>Contributors</h2>
-	<ul id="contrib-list">
-		<% @playlist.contributors.each do |contributor| %>
-			<li><h3 class="contrib-name"><%= contributor.name.capitalize %></h3><h3 class="contrib-phone"><%= contributor.phone_number.gsub("+1", '').gsub(/(\d{3})(\d{3})(\d{4})/, '(\1) \2-\3') %></h3></li>
-		<% end %>
-	</ul>
+  <%= link_to "x", @user, id: "close" %>
+  <%= form_for @contributor do |f| %>
+    <%= f.label :name, "Name" %>
+    <%= f.text_field :name %>
+    <%= f.label :phone_number, "Phone Number" %>
+    <%= f.text_field :phone_number, placeholder: "555-867-5309" %>
+    <%= f.submit "Add to Playlist", id: "friend-submit" %>
+  <% end %>
+  <h2>Contributors</h2>
+  <ul id="contrib-list">
+    <% @playlist.contributors.each do |contributor| %>
+      <li><h3 class="contrib-name"><%= contributor.name.capitalize %></h3><h3 class="contrib-phone"><%= contributor.phone_number.gsub("+1", '').gsub(/(\d{3})(\d{3})(\d{4})/, '(\1) \2-\3') %></h3></li>
+    <% end %>
+  </ul>
 </div>

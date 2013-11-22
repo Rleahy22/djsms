@@ -1,20 +1,20 @@
 <div class="container">
-	<h1><%= @user.username %></h1>
-	<% if @user == @current_user %>
-		<%= render 'shared/playlist_form' if @playlist %>
-	<% end %>
+  <h1><%= @user.username %></h1>
+  <% if @user == @current_user %>
+    <%= render 'shared/playlist_form' if @playlist %>
+  <% end %>
 
-	<div class="playlists">
-		<% if @user.playlists.any? %>
-			<h2>Playlists:</h2>
-			<ul>
-				<% @playlists.each do |playlist| %>
-					<li>
-						<%= link_to playlist.title, playlist_path(playlist), class: "view-playlist" %>
-					</li>
-				<% end %>
-			</ul>
-			<%= will_paginate @playlists %>
-		<% end %>
-	</div>
+  <div class="playlists">
+    <% if @user.playlists.any? %>
+      <h2>Playlists:</h2>
+      <ul>
+        <% @playlists.each do |playlist| %>
+          <li>
+            <%= link_to playlist.title, playlist_path(playlist), class: "view-playlist" %>
+          </li>
+        <% end %>
+      </ul>
+      <%= will_paginate @playlists %>
+    <% end %>
+  </div>
 </div>
