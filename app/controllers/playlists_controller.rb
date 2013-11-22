@@ -22,7 +22,7 @@ class PlaylistsController < ApplicationController
 
 	def destroy
 		@playlist.destroy
-		redirect_to user_path(current_user)
+		render nothing: true
 	end
 
 	def edit
