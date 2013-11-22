@@ -1,188 +1,188 @@
 body {
-	background: url('oakland_skyline.jpg');
-	background-size: cover;
+  background: url('oakland_skyline.jpg');
+  background-size: cover;
 }
 
 a {
-	text-decoration: none;
-	color: white;
+  text-decoration: none;
+  color: white;
 }
 
 a:hover {
-	color: gray;
+  color: gray;
 }
 
 .nav {
-	position: fixed;
-	top: 0;
-	width: 100%;
-	overflow: hidden;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  overflow: hidden;
 }
 
 .nav-link {
-	color: white;
-	text-decoration: none;
-	font-family: "Helvetica" Arial Sans-Serif;
-	font-size: 200%;
-	padding: 0 10px;
+  color: white;
+  text-decoration: none;
+  font-family: "Helvetica" Arial Sans-Serif;
+  font-size: 200%;
+  padding: 0 10px;
 }
 
 #errors {
-	color: red;
-	font-family: "Helvetica" Arial Sans-Serif;
-	font-size: 200%;
-	font-weight: bold;
+  color: red;
+  font-family: "Helvetica" Arial Sans-Serif;
+  font-size: 200%;
+  font-weight: bold;
 }
 
 .alert-error {
-	text-align: center;
-	color: red;
-	margin: auto;
-	position: fixed;
-	bottom: 10%;
-	left: 32%;
-	font-family: "Helvetica" Arial Sans-Serif;
-	font-size: 200%;
-	font-weight: bold;
-	width: 700px;
+  text-align: center;
+  color: red;
+  margin: auto;
+  position: fixed;
+  bottom: 10%;
+  left: 32%;
+  font-family: "Helvetica" Arial Sans-Serif;
+  font-size: 200%;
+  font-weight: bold;
+  width: 700px;
 }
 
 ul {
-	list-style: none
+  list-style: none
 }
 
 li {
-	font-size: 200%;
-	font-family: "Helvetica" Arial Sans-Serif;
-	font-weight: bold;
+  font-size: 200%;
+  font-family: "Helvetica" Arial Sans-Serif;
+  font-weight: bold;
 }
 
 #user-link:hover .settings{
-	visibility: visible;
+  visibility: visible;
 }
 
 .right-nav {
-	float: right;
+  float: right;
 }
 
 .container {
-	width: 700px;
-	margin: 0 auto;
+  width: 700px;
+  margin: 0 auto;
 }
 
 h1 {
-	margin-bottom: 20px;
-	font-family: "Helvetica" Arial Sans-Serif;
-	color: white;
-	font-size: 1000%;
-	text-align: center;
-	text-shadow:
-	    -1px -1px 0 #000,
-	    1px -1px 0 #000,
-	    -1px 1px 0 #000,
-	    1px 1px 0 #000;
+  margin-bottom: 20px;
+  font-family: "Helvetica" Arial Sans-Serif;
+  color: white;
+  font-size: 1000%;
+  text-align: center;
+  text-shadow:
+      -1px -1px 0 #000,
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+      1px 1px 0 #000;
 }
 
 h2 {
-	margin-bottom: 20px;
-	font-family: "Helvetica" Arial Sans-Serif;
-	color: white;
-	font-size: 700%;
-	text-align: center;
-	text-shadow:
-	    -1px -1px 0 #000,
-	    1px -1px 0 #000,
-	    -1px 1px 0 #000,
-	    1px 1px 0 #000;
+  margin-bottom: 20px;
+  font-family: "Helvetica" Arial Sans-Serif;
+  color: white;
+  font-size: 700%;
+  text-align: center;
+  text-shadow:
+      -1px -1px 0 #000,
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+      1px 1px 0 #000;
 }
 
 h3 {
-	font-family: "Helvetica" Arial Sans-Serif;
-	color: white;
-	text-shadow:
-	    -1px -1px 0 #000,
-	    1px -1px 0 #000,
-	    -1px 1px 0 #000,
-	    1px 1px 0 #000;
+  font-family: "Helvetica" Arial Sans-Serif;
+  color: white;
+  text-shadow:
+      -1px -1px 0 #000,
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+      1px 1px 0 #000;
 }
 
 form {
-	text-align: center;
+  text-align: center;
 }
 
 label {
-	color: white;
-	font-weight: bolder;
-	text-shadow:
-	    -2px -2px 0 #000,
-	    2px -2px 0 #000,
-	    -2px 2px 0 #000,
-	    2px 2px 0 #000;
+  color: white;
+  font-weight: bolder;
+  text-shadow:
+      -2px -2px 0 #000,
+      2px -2px 0 #000,
+      -2px 2px 0 #000,
+      2px 2px 0 #000;
 }
 
 .signin-label {
-	font-size: 700%
+  font-size: 700%
 }
 
 input {
-	width: 645px;
-	height: 50px;
-	font-size: 200%;
-	box-shadow: 1px 1px 5px #000;	
-	margin: 5px;
+  width: 645px;
+  height: 50px;
+  font-size: 200%;
+  box-shadow: 1px 1px 5px #000; 
+  margin: 5px;
 }
 
 .submit {
-	margin-top: 10px;
-	width: 200px;
-	font-size: 200%;
-	display: inline-block;
+  margin-top: 10px;
+  width: 200px;
+  font-size: 200%;
+  display: inline-block;
 }
 
 .sign-up {
-	font-size: 200%;
-	color: black;
-	background-color: #E8E8E8;
-	text-decoration: none;
-	width: 200px;
-	padding: 6px 0 6px 0;
-	-webkit-appearance: button;
+  font-size: 200%;
+  color: black;
+  background-color: #E8E8E8;
+  text-decoration: none;
+  width: 200px;
+  padding: 6px 0 6px 0;
+  -webkit-appearance: button;
 }
 
 .new_user {
-	margin: 50px auto;
-	width: 700px;
+  margin: 50px auto;
+  width: 700px;
 }
 
 .edit_user {
-	margin: 50px auto;
-	width: 700px;
+  margin: 50px auto;
+  width: 700px;
 }
 
 .signup-label {
-	font-size: 350%
+  font-size: 350%
 }
 
 .signup-edit {
-	margin-top: 30px;
-	width: 400px;
+  margin-top: 30px;
+  width: 400px;
 }
 
 .loading-dj {
-	height: 100%;
-	width: 100%;
-	position: fixed;
-	top: 12.5%;
-	left: 5%;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 12.5%;
+  left: 5%;
 }
 
 #loading-image {
-	height: 85%;
-	width: 90%;
+  height: 85%;
+  width: 90%;
 }
 
 #warming {
-	width: 90%;
-	position: absolute;
-	top: 0%;
+  width: 90%;
+  position: absolute;
+  top: 0%;
 }

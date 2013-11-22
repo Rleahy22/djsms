@@ -1,300 +1,300 @@
 #playlist-h1 {
-	margin-top: 50px;
+  margin-top: 50px;
 }
 
 .search {
-	width: 900px;
-	margin: auto;
+  width: 900px;
+  margin: auto;
 }
 
 #add-button {
-	margin-left: 10px
+  margin-left: 10px
 }
 
 .new_song {
-	margin-bottom: 40px;
+  margin-bottom: 40px;
 }
 
 #song_query {
-	width: 670px;
-	text-align: center;
+  width: 670px;
+  text-align: center;
 }
 
 #submit-search {
-	width: 200px;
+  width: 200px;
 }
 
 .search-results {
-	display: none;
-	width: 670px;
-	height: 58px;
-	margin: -44px 0 20px 6px;
-	background-color: maroon;
-	opacity: .8;
-	border: solid 2px white;
+  display: none;
+  width: 670px;
+  height: 58px;
+  margin: -44px 0 20px 6px;
+  background-color: maroon;
+  opacity: .8;
+  border: solid 2px white;
 }
 
 .search-results h3 {
-	color: white;
-	text-shadow:
-	    -1px -1px 0 black,
-	    1px -1px 0 black,
-	    -1px 1px 0 black,
-	    1px 1px 0 black;
-	font-family: "Helvetica" Arial Sans-Serif;
-	font-size: 100%;
-	width: 460px;
-	padding: 20px 0 0 0;
-	float: right;
-	display: inline-block;
+  color: white;
+  text-shadow:
+      -1px -1px 0 black,
+      1px -1px 0 black,
+      -1px 1px 0 black,
+      1px 1px 0 black;
+  font-family: "Helvetica" Arial Sans-Serif;
+  font-size: 100%;
+  width: 460px;
+  padding: 20px 0 0 0;
+  float: right;
+  display: inline-block;
 }
 
 #add-song {
-	width: 150px;
-	height: 59px;
-	float: right;
-	font-family: "Helvetica" Arial Sans-Serif;
-	font-size: 150%;
-	font-weight: bold;
-	text-shadow:
-	    -1px -1px 0 white,
-	    1px -1px 0 white,
-	    -1px 1px 0 white,
-	    1px 1px 0 white;
+  width: 150px;
+  height: 59px;
+  float: right;
+  font-family: "Helvetica" Arial Sans-Serif;
+  font-size: 150%;
+  font-weight: bold;
+  text-shadow:
+      -1px -1px 0 white,
+      1px -1px 0 white,
+      -1px 1px 0 white,
+      1px 1px 0 white;
 }
 
 .player {
-	width: 900px;
-	height: 500px;
-	border: solid 5px white;
-	margin: 0 auto 50px auto;
-	position: relative;
-	background-color: maroon;
-	opacity: .8;
+  width: 900px;
+  height: 500px;
+  border: solid 5px white;
+  margin: 0 auto 50px auto;
+  position: relative;
+  background-color: maroon;
+  opacity: .8;
 }
 
 .loading {
-	width: 300px;
-	position: absolute;
-	top: 70px;
-	left: 300px;
+  width: 300px;
+  position: absolute;
+  top: 70px;
+  left: 300px;
 }
 
 #song-list {
-	margin-bottom: 0;
-	height: 440px;
-	overflow: auto;
+  margin-bottom: 0;
+  height: 440px;
+  overflow: auto;
 }
 
 .controls {
-	position: relative;
-	bottom: 0%;
-	border-top: solid 5px white;
-	border-bottom: solid 5px white;
-	width: 900px;
-	height: 60px;
-	background-color: black
+  position: relative;
+  bottom: 0%;
+  border-top: solid 5px white;
+  border-bottom: solid 5px white;
+  width: 900px;
+  height: 60px;
+  background-color: black
 }
 
 .buttons {
-	position: relative;
-	top: 0;
-	background-color: black;
-	margin: auto;
-	width: 248px;
-	height: 60px;
-	border-right: solid 5px white;
-	border-left: solid 5px white;
-	z-index: 1;
+  position: relative;
+  top: 0;
+  background-color: black;
+  margin: auto;
+  width: 248px;
+  height: 60px;
+  border-right: solid 5px white;
+  border-left: solid 5px white;
+  z-index: 1;
 }
 
 .player-buttons {
-	padding: 0 10px;
-	height: 60px;
-	width: auto;
+  padding: 0 10px;
+  height: 60px;
+  width: auto;
 }
 
 .hidden {
-	visibility: hidden;
+  visibility: hidden;
 }
 
 .playlist-link {
-	font-family: "Helvetica" Arial Sans-Serif;
-	font-size: 200%;
+  font-family: "Helvetica" Arial Sans-Serif;
+  font-size: 200%;
 }
 
 #edit-playlist {
-	float: right;
-	right: 0;
+  float: right;
+  right: 0;
 }
 
 #song-list {
-	margin: 0;
-	padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .playlist-song {
-	display: inline-block;
-	height: 58px;
-	width: 885px;
-	border-bottom: 2px solid white;
-	margin-top: -3px;
-	padding-right: 15px;
+  display: inline-block;
+  height: 58px;
+  width: 885px;
+  border-bottom: 2px solid white;
+  margin-top: -3px;
+  padding-right: 15px;
 }
 
 #details {
-	float: right;
-	height: 58px;
-	width: 805px;
-	vertical-align: middle
+  float: right;
+  height: 58px;
+  width: 805px;
+  vertical-align: middle
 }
 
 .song-icon {
-	height: 58px;
-	display: inline-block;
+  height: 58px;
+  display: inline-block;
 }
 
 .song-info {
-	text-align: center;
-	float: right;
-	margin: 0;
-	width: 800px;
-	padding: 7px;
-	-moz-user-select: none;
+  text-align: center;
+  float: right;
+  margin: 0;
+  width: 800px;
+  padding: 7px;
+  -moz-user-select: none;
   -khtml-user-select: none;
   -webkit-user-select: none;
   user-select: none; 
 }
 
 .song-long {
-	font-size: 75%;
-	overflow: hidden;
-	padding-top: 13px;
+  font-size: 75%;
+  overflow: hidden;
+  padding-top: 13px;
 }
 
 .song-info:hover {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 .playing {
-	background-color: silver;
+  background-color: silver;
 }
 
 .playing h3 {
-	color: black;
-	text-shadow:
-	    -1px -1px 0 white,
-	    1px -1px 0 white,
-	    -1px 1px 0 white,
-	    1px 1px 0 white;
+  color: black;
+  text-shadow:
+      -1px -1px 0 white,
+      1px -1px 0 white,
+      -1px 1px 0 white,
+      1px 1px 0 white;
 }
 
 .playing marquee {
-	color: black;
-	text-shadow:
-	    -1px -1px 0 white,
-	    1px -1px 0 white,
-	    -1px 1px 0 white,
-	    1px 1px 0 white;
+  color: black;
+  text-shadow:
+      -1px -1px 0 white,
+      1px -1px 0 white,
+      -1px 1px 0 white,
+      1px 1px 0 white;
 }
 
 .edit-playlist {
-	width: 700px;
-	margin: 100px auto
+  width: 700px;
+  margin: 100px auto
 }
 
 #rename {
-	font-family: "Helvetica" Arial Sans-Serif;
-	font-size: 525%;
+  font-family: "Helvetica" Arial Sans-Serif;
+  font-size: 525%;
 }
 
 #update {
-	width: 650px;
+  width: 650px;
 }
 
 #playing-marquee-left {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 326px;
-	z-index: 9001;
-	font-family: "Helvetica" Arial Sans-Serif;
-	color: white;
-	font-size: 200%;
-	display: none;
-	padding-top: 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 326px;
+  z-index: 9001;
+  font-family: "Helvetica" Arial Sans-Serif;
+  color: white;
+  font-size: 200%;
+  display: none;
+  padding-top: 10px;
 }
 
 #playing-marquee-right {
-	position: absolute;
-	top: 0;
-	right: 0;
-	width: 326px;
-	z-index: 9001;
-	font-family: "Helvetica" Arial Sans-Serif;
-	color: white;
-	font-size: 200%;
-	padding-top: 10px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 326px;
+  z-index: 9001;
+  font-family: "Helvetica" Arial Sans-Serif;
+  color: white;
+  font-size: 200%;
+  padding-top: 10px;
 }
 
 .add-friends {
-	background-color: silver;
-	border: 3px solid white;
-	width: 910px;
-	height: 820px;
-	position: fixed;
-	top: 8%;
-	right: 50%;
-	margin-right: -458px;
-	display: none;
-	opacity: .98;
+  background-color: silver;
+  border: 3px solid white;
+  width: 910px;
+  height: 820px;
+  position: fixed;
+  top: 8%;
+  right: 50%;
+  margin-right: -458px;
+  display: none;
+  opacity: .98;
 }
 
 .new_contributor input {
-	width: 250px;
-	text-align: center;
-	margin: 20px 20px 10px 20px;
+  width: 250px;
+  text-align: center;
+  margin: 20px 20px 10px 20px;
 }
 
 .new_contributor label {
-	color: black;
-	font-size: 20px;
-	text-shadow: none;
+  color: black;
+  font-size: 20px;
+  text-shadow: none;
 }
 
 #close {
-	color: black;
-	float: right;
-	border: 1px solid black;
-	margin: 7px;
-	padding: 0 5px 2px 5px;
+  color: black;
+  float: right;
+  border: 1px solid black;
+  margin: 7px;
+  padding: 0 5px 2px 5px;
 }
 
 .add-friends h2 {
-	margin-top: 10px;
-	color: black;
-	text-shadow: none;
+  margin-top: 10px;
+  color: black;
+  text-shadow: none;
 }
 
 #contrib-list {
-	margin-top: 10px;
-	padding: 0;
+  margin-top: 10px;
+  padding: 0;
 }
 
 #contrib-list li {
-	margin: auto;
-	width: 600px;
+  margin: auto;
+  width: 600px;
 }
 
 .contrib-name {
-	margin: 0;
-	float: left;
-	clear: both;
-	letter-spacing: 1px;
+  margin: 0;
+  float: left;
+  clear: both;
+  letter-spacing: 1px;
 }
 
 .contrib-phone {
-	margin: 0;
-	float: right;
-	letter-spacing: 2px;
+  margin: 0;
+  float: right;
+  letter-spacing: 2px;
 }
