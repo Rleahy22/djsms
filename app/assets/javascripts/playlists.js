@@ -7,6 +7,7 @@ $(document).ready(function() {
   var Playlist = function(name, key) {
     this.name = name
     this.key = key
+    // this.songs = {}
 
     this.create = function() {
       R.request({
@@ -21,7 +22,28 @@ $(document).ready(function() {
           this.key = response.result['key']
         },
         error: function(response) {
-          console.log("error: " + response.message)
+          console.log("Error: " + response.message)
+        }
+      })
+    }
+
+    this.delete = function(route) {
+      R.request({
+        method: "deletePlaylist",
+        content: {
+          playlist: window.playlist.key,
+        },
+        success: function(response) {
+          $.ajax({
+            url: route,
+            type: 'DELETE',
+            success: function() {
+              window.location.href = '/'
+            }
+          })
+        },
+        error: function(response) {
+          console.log("Error: " + response.message)
         }
       })
     }
@@ -109,6 +131,92 @@ $(document).ready(function() {
     }
   }
 
+  var Player = function(source) {
+    this.source = source.key
+
+    this.play = function() {
+      if (ran == false) {
+        R.player.play({source: this.source})
+        $('.play-visible').toggle()
+        $('.pause-visible').toggle()
+        this.watchForSongChange()
+        this.watchForSourceChange()
+        ran = true
+      } else {
+        this.togglePlayPause()
+      } 
+    }
+
+    this.togglePlayPause = function() {
+      R.player.togglePause()
+      $('.play-visible').toggle()
+      $('.pause-visible').toggle()
+    }
+
+    this.stop = function() {
+      $('.play-visible').show()
+      $('.pause-visible').hide()
+      R.player.pause()
+    }
+
+    this.next = function() {
+      R.player.next()
+      if (R.player.playState() == 0) {
+        R.player.pause()
+      }
+    }
+
+    this.previous = function() {
+      R.player.previous()
+      if (R.player.playState() == 0) {
+        R.player.pause()
+      }
+    }
+
+    this.watchForSongChange = function() {
+      R.player.on("change:playingTrack", function(newSong) {
+        currentKey = newSong.attributes.key
+        if (changed == true) {
+          trackPosition = R.player.sourcePosition()
+          R.player.play({source: window.player.source, index: trackPosition})
+          changed = false
+        }
+        $('.playing').removeClass("playing")
+        $('.' + currentKey).addClass("playing")
+        index = $('.playing').index()
+        $('#song-list').scrollTop(index * 59)
+        $('#playing-marquee-left').html(newSong.attributes.name + ' - ' + newSong.attributes.artist)
+        $('#playing-marquee-right').html(newSong.attributes.name + ' - ' + newSong.attributes.artist)
+      });  
+    }
+
+    this.watchForSourceChange = function() {
+      R.player.on("change:playingSource", function(newSource) {
+        if (newSource.attributes.key != window.player.source) {
+          window.player.stop()
+        }
+      })  
+    }
+
+    this.playSpecificSong = function() {
+      // need to include logic to create player if not created yet
+      R.player.play({source: window.playlist.key, index: $(this).index()})
+      if (R.player.playState() == 0) {
+        $('.play-visible').toggle()
+        $('.pause-visible').toggle()
+      }
+      window.player.watchForSongChange()
+      window.player.watchForSourceChange()
+      ran = true
+    }
+  }
+
+  var song = function(title, artist, key) {
+    this.title = title
+    this.artist = artist
+    this.key = key
+  }
+
   var playlistPost = function(key) {
     $.post('/playlists',
       {playlist: {title: $('input[name="playlist[title]"]').val(), 
@@ -129,15 +237,15 @@ $(document).ready(function() {
                 types: "track"
         },
         success: function(response) {
-                song = response.result.results[0]
-                if (source == 'web') {
-                  window.playlist.addSongToDJSMS(song)
-                } else {
-                  window.playlist.addSongToRdio(song.key, query)
-                }
+          song = response.result.results[0]
+          if (source == 'web') {
+            window.playlist.addSongToDJSMS(song)
+          } else {
+            window.playlist.addSongToRdio(song.key, query)
+          }
         },
         error: function(response) {
-                console.log("error " + response.message)
+          console.log("error " + response.message)
         }
       })
     })
@@ -194,6 +302,8 @@ $(document).ready(function() {
 
   window.playlist = new Playlist($('#playlist-h1').text(), $('.playlist-data').data('playlistrdioid'))
 
+  $('.pause-visible').toggle()
+
   $('.create-playlist').on('click', function(e) {
     e.preventDefault()
     window.playlist = new Playlist($('input[name="playlist[title]"]').val())
@@ -201,22 +311,24 @@ $(document).ready(function() {
     // newPlaylist($('input[name="playlist[title]"]').val())
   })
 
-  $('.pause-visible').toggle()
-
   $('.play-visible').on('click', function() {
     window.playlist.play()
+    // window.player = new Player(window.playlist)
   })
 
   $('.pause-visible').on('click', function() {
     window.playlist.togglePlayPause()
+    // window.player.togglePlayPause()
   })
 
   $('.previous').on('click', function() {
     window.playlist.previous()
+    // window.player.previous()
   })
 
   $('.next').on('click', function() {
     window.playlist.next()
+    // window.player.next()
   })
 
   $('.view-playlist').on('click', function(e) {
@@ -231,6 +343,7 @@ $(document).ready(function() {
   $('#delete-playlist').on('click', function(e) {
     e.preventDefault()
     var route = $(this).attr('href')
+    // window.playlist.delete(route)
     R.request({
       method: "deletePlaylist",
       content: {
@@ -261,7 +374,6 @@ $(document).ready(function() {
 
   $('#add-button').on('click', function(e) {
     e.preventDefault()
-    console.log('hey')
     $('.add-friends').show()
   })
 
@@ -298,6 +410,10 @@ $(document).ready(function() {
   // })
 
   $('.player').on('dblclick', '.playlist-song', function() {
+    // if window.player === null {
+    //   window.player = new Player(window.playlist)
+    // }
+    // window.player.playSpecificSong()
     R.player.play({source: $('.playlist-data').data('playlistrdioid'), index: $(this).index()})
     if (R.player.playState() == 0) {
       $('.play-visible').toggle()
