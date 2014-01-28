@@ -40,7 +40,7 @@ $(document).ready(function() {
     newUser()
   })
 
-  $('.signup-edit').on('click', function(e) {
+  $('.signup-new').on('click', function(e) {
     e.preventDefault()
     $.post('/users',
       {user: {username: $('input[name="user[username]"]').val(),
@@ -52,6 +52,27 @@ $(document).ready(function() {
         $('body').append(data)
       }             
     )
+  })
+
+  $('.edit_user').on('submit', function(e) {
+    e.preventDefault()
+    $.ajax({
+      url: $(this).attr('action'),
+      type: 'PUT',
+      data: {user: {username: $('input[name="user[username]"]').val(),
+              email: $('input[name="user[email]"]').val(),
+              password: $('input[name="user[password]"]').val(),
+              password_confirmation: $('input[name="user[password_confirmation]"]').val()}},
+      success: function(data) {
+        console.log("holla")
+        $('.nav').remove()
+        $('.container').remove()
+        $('body').append(data)
+      },
+      error: function(data) {
+        console.log(data)
+      }
+    })
   })
 
   $('.nav-link').on('click', function(e) {
